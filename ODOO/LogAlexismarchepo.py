@@ -1,6 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
 import xmlrpc.client
+import requests
+import base64
+from PIL import Image, ImageTk
+from io import BytesIO
+import sys
+
 
 def Connect(ip="172.31.10.204", password="123456789"):
     # Paramètres de connexion à Odoo
@@ -98,30 +104,50 @@ class PageArticlesOdoo(tk.Toplevel):
         super().__init__(root)
         self.title("Page des Articles Odoo")
 
-        # Utiliser la fonction Product pour récupérer les informations sur les produits
+        self.models = models
+        self.db = db
+        self.uid = uid
+        self.password = password
+
         self.liste_articles = tk.Listbox(self, height=10, width=50)
-        self.populate_articles(models, db, uid, password)
+        self.populate_articles()
         self.liste_articles.pack(pady=20)
+
+        self.bouton_modifier_stock = tk.Button(self, text="Modifier Stock", command=self.modifier_stock)
+        self.bouton_modifier_stock.pack()
+
+        self.stock_entry = tk.Entry(self)
+        self.stock_entry.pack()
 
         self.bouton_quitter = tk.Button(self, text="Quitter", command=self.quitter)
         self.bouton_quitter.pack()
 
-    def populate_articles(self, models, db, uid, password):
+        self.image_label = tk.Label(self)
+        self.image_label.pack()
+
+    def populate_articles(self):
         try:
-            # Utiliser la fonction Product pour récupérer les informations sur les produits
-            product_ids = models.execute_kw(db, uid, password,
-                                            'product.template', 'search',
-                                            [[]])
+            product_ids = self.models.execute_kw(self.db, self.uid, self.password,
+                                                 'product.template', 'search',
+                                                 [[]])
 
             if product_ids:
                 for product_id in product_ids:
-                    product_data = models.execute_kw(db, uid, password,
-                                                     'product.template', 'read',
-                                                     [product_id],
-                                                     {'fields': ['name', 'list_price']})
+                    product_data = self.models.execute_kw(self.db, self.uid, self.password,
+                                                          'product.template', 'read',
+                                                          [product_id],
+                                                          {'fields': ['name', 'list_price', 'image_1920', 'qty_available']})
 
-                    product_info = f"{product_data[0]['name']} - Prix: {product_data[0]['list_price']}"
+                    product_info = f"{product_data[0]['name']} - Prix: {product_data[0]['list_price']} - Stock: {product_data[0]['qty_available']}"
                     self.liste_articles.insert(tk.END, product_info)
+
+                    if product_data[0]['image_1920']:
+                        image_url = f"http://172.31.10.204:8069{product_data[0]['image_1920']}"
+                        image = self.load_image_from_url(image_url)
+                        if image:
+                            label = tk.Label(self, image=image)
+                            label.image = image
+                            label.pack()
 
             else:
                 self.liste_articles.insert(tk.END, "Aucun produit trouvé dans Odoo")
@@ -129,8 +155,90 @@ class PageArticlesOdoo(tk.Toplevel):
         except Exception as e:
             messagebox.showerror("Erreur", f"Erreur lors de la récupération des produits depuis Odoo : {e}")
 
+    """ def modifier_stock(self):
+        selected_item = self.liste_articles.curselection()
+        if selected_item:
+            selected_product = self.liste_articles.get(selected_item)
+            product_name = selected_product.split(' - ')[0]  # Récupérer le nom du produit à partir de la chaîne affichée
+
+            new_stock = self.stock_entry.get()
+            try:
+                new_stock = float(new_stock)  # Convertir l'entrée en un nombre décimal
+                product_id = self.models.execute_kw(self.db, self.uid, self.password,
+                                                    'product.template', 'search',
+                                                    [[['name', '=', product_name]]])
+                if product_id:
+                    # Assurez-vous que product_id est le premier élément de la liste retournée
+                    product_id = product_id[0]
+                    print(new_stock)
+                    print(product_id)
+                    print(self.password)
+                    print(self.uid)
+                    # Ensuite, utilisez product_id pour mettre à jour la quantité en stock
+                    self.models.execute_kw(self.db, self.uid, self.password,'stock.quant', 'write',[[product_id], {'quantity': new_stock}])
+                    messagebox.showinfo("Succès", "Stock modifié avec succès")
+                else:
+                    messagebox.showerror("Erreur", "Produit non trouvé")
+            except ValueError:
+                messagebox.showerror("Erreur", "Veuillez saisir un nombre valide pour le stock")"""
+
+    
+
+    # Mettre à jour le stock d'un produit
+    def modifier_stock(self, product_id, quantity):
+        if self.mModels is not None:
+            # Rechercher le stock existant pour le produit spécifié
+            stock_entry = self.mModels.execute_kw(
+                self.mErpDB, self.mUser_id, self.mErpPwd,
+                'stock.quant', 'search_read',
+                [['&', ('product_id', '=', product_id), ('location_id', '=', 'WH/Stock')]],
+                {'fields': ['id', 'quantity']}
+            )
+ 
+            if stock_entry:
+                # Mettre à jour la quantité en ajoutant la nouvelle quantité
+                new_quantity = stock_entry[0]['quantity'] + quantity
+ 
+                # Vérifier les droits d'accès au stock
+                access_inventory = self.mModels.execute_kw(
+                    self.mErpDB, self.mUser_id, self.mErpPwd,
+                    'stock.quant', 'check_access_rights',
+                    ['write'], {'raise_exception': False})
+ 
+                if access_inventory:
+                    # Mettre à jour le stock uniquement si l'utilisateur a les droits d'accès
+                    self.mModels.execute_kw(
+                        self.mErpDB, self.mUser_id, self.mErpPwd,
+                        'stock.quant', 'write',
+                        [[stock_entry[0]['id']], {'quantity': new_quantity}]
+                    )
+ 
+                    print(f"Stock mis à jour pour le produit {product_id}. Nouvelle quantité : {new_quantity}")
+                else:
+                    print("L'utilisateur n'a pas les droits nécessaires pour modifier le stock.")
+            else:
+                print(f"Aucun stock trouvé pour le produit {product_id}.")
+        else:
+            print("Connexion à Odoo non établie ou modèles non initialisés.")
+
+
+    def load_image_from_url(self, url):
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                image = Image.open(BytesIO(response.content))
+                image = ImageTk.PhotoImage(image)
+                return image
+            else:
+                print(f"Erreur lors du téléchargement de l'image : Statut HTTP {response.status_code}")
+        except Exception as e:
+            print(f"Erreur lors du chargement de l'image : {e}")
+        return None
+
+
     def quitter(self):
         self.destroy()
+        sys.exit()
 
 class Login:
     def __init__(self, root):
@@ -183,6 +291,7 @@ class Login:
             connection_result = Connect()
             if connection_result:
                 self.models, self.uid, self.url, self.db = connection_result
+                self.root.withdraw()  # Masquer la fenêtre de connexion
             else:
                 print("Échec de la connexion à Odoo")
                 messagebox.showerror("Erreur", "Impossible de se connecter à Odoo")
@@ -190,7 +299,6 @@ class Login:
 
         print("Ouverture de la page des articles Odoo...")
         fenetre_articles_odoo = PageArticlesOdoo(self.root, self.models, self.db, self.uid, "123456789")
-
         print("Fenêtre des articles Odoo ouverte avec succès.")
 
 if __name__ == "__main__":
