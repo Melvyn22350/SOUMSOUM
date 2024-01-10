@@ -42,5 +42,4 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 ```bash
 git clone https://github.com/SOUMSOUM/
 
-
-ff
+"ff"
