@@ -43,8 +43,7 @@ git clone https://github.com/SOUMSOUM/erp-system.git
 cd erp-system
 
     Exécutez le programme.
-
-```bash
+bash
 
 python Application_Production.py
 
