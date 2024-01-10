@@ -25,15 +25,15 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 ### Application Logistique
 
-- **Fonctionnalités :** Affichage du stock des articles, mise à jour du stock, visualisation des articles en images.
+- **Fonctionnalités :** Affichage du stock des articles, mise à jour du stock, visualisation des images des articles.
 
 ### Application Production
 
-- **Fonctionnalités :** Surveillance et mise à jour des ordres de fabrication.
+- **Fonctionnalités :** Surveillance et mise à jour des ordres de fabrication, déconnexion sécurisée.
 
 ## Configuration Requise
 
-Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme. Vous pouvez le faire en modifiant les informations entre les balises `#===========` dans le code.
+Assurez-vous de configurer correctement les paramètres du serveur Odoo et le chemin du programme avant d'utiliser ce programme. Vous pouvez le faire en modifiant les informations entre les balises `#===========` dans le code.
 
 ## Installation
 
@@ -42,4 +42,28 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 ```bash
 git clone https://github.com/SOUMSOUM/
 
-"ff"
+    Exécutez le programme.
+
+bash
+
+python Application_Production.py
+
+Dépendances
+
+Installez les bibliothèques nécessaires avec la commande suivante :
+
+bash
+
+pip install pillow
+
+Guide de l'Utilisateur
+
+Consultez le tableau d'affichage pour obtenir un aperçu complet des ordres de fabrication. Cliquez sur un ID d'ordre pour visualiser l'image du produit associé. Utilisez les champs dédiés pour mettre à jour la quantité produite.
+Licence
+
+Ce programme est distribué sous la licence MIT. Consultez le fichier LICENSE pour plus de détails.
+Contact
+
+Pour toute question ou assistance, veuillez contacter notre équipe informatique à l'adresse tech_support@soumsoum.com.
+
+Merci d'avoir choisi SOUMSOUM ERP pour votre gestion de la production. Nous sommes engagés à fournir des solutions innovantes pour stimuler la croissance de votre entreprise.
