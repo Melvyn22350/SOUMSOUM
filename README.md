@@ -1,5 +1,4 @@
 # SOUMSOUM ERP - Gestion de la Production
-Créer par Melvyn DUPAS, Alexis Lepetit, Ewen Kergoat
 
 Bienvenue dans le système ERP (Enterprise Resource Planning) de SOUMSOUM, conçu pour évoluer vers une organisation 4.0 en intégrant un ERP afin de planifier efficacement la production de nos télévisions de luxe.
 
@@ -17,7 +16,7 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 - **Déconnexion Sécurisée:** Terminez votre session en toute sécurité à l'aide du bouton "Déconnexion".
 
-## Programmes
+## Autres Programmes
 
 ### Page de Connexion
 
@@ -29,18 +28,19 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 ### Application Production
 
-- **Fonctionnalités :** Surveillance et mise à jour des ordres de fabrication, déconnexion sécurisée.
+- **Fonctionnalités :** Surveillance et mise à jour des ordres de fabrication, visualisation des images des produits, déconnexion sécurisée.
 
 ## Configuration Requise
 
-Assurez-vous de configurer correctement les paramètres du serveur Odoo et le chemin du programme avant d'utiliser ce programme. Vous pouvez le faire en modifiant les informations entre les balises `#===========` dans le code.
+Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme. Vous pouvez le faire en modifiant les informations entre les balises `#===========` dans le code.
 
 ## Installation
 
 1. Clonez ce référentiel.
 
 ```bash
-git clone https://github.com/SOUMSOUM/
+git clone https://github.com/SOUMSOUM/erp-system.git
+cd erp-system
 
     Exécutez le programme.
 
