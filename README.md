@@ -39,11 +39,11 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 1. Clonez ce référentiel.
 
 ```bash
-git clone https://github.com/SOUMSOUM/erp-system.git
-cd erp-system
+git clone https://github.com/SOUMSOUM/
 
+```
     Exécutez le programme.
-bash
+
 
 python Application_Production.py
 
