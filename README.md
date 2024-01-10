@@ -42,26 +42,25 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 git clone https://github.com/SOUMSOUM/
 
 ```
-    Exécutez le programme.
+
+Exécutez le programme.
 
 
-python Application_Production.py
-
-Dépendances
+## Dépendances
 
 Installez les bibliothèques nécessaires avec la commande suivante :
 
-bash
-
+```bash
 pip install pillow
+```
 
-Guide de l'Utilisateur
+## Guide de l'Utilisateur
 
 Consultez le tableau d'affichage pour obtenir un aperçu complet des ordres de fabrication. Cliquez sur un ID d'ordre pour visualiser l'image du produit associé. Utilisez les champs dédiés pour mettre à jour la quantité produite.
-Licence
+## Licence
 
 Ce programme est distribué sous la licence MIT. Consultez le fichier LICENSE pour plus de détails.
-Contact
+## Contact
 
 Pour toute question ou assistance, veuillez contacter notre équipe informatique à l'adresse tech_support@soumsoum.com.
 
