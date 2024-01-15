@@ -44,7 +44,7 @@ class StockUpdaterGUI:
 #=====================================================================
 #=====================================================================
         # Connexion à Odoo
-        url = "http://localhost:8069"
+        url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
@@ -94,7 +94,7 @@ class StockUpdaterGUI:
 #=====================================================================
 #=====================================================================
         # Connexion à Odoo
-        url = "http://localhost:8069"
+        url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
@@ -141,7 +141,7 @@ class StockUpdaterGUI:
 #=====================================================================
 #=====================================================================
         # Connexion à Odoo
-        url = "http://localhost:8069"
+        url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
@@ -195,7 +195,7 @@ class StockUpdaterGUI:
     def redirect_to_login(self):
         print("Redirection vers page de connexion.")
         self.master.destroy()  # Fermez la fenêtre actuelle
-        subprocess.Popen([sys.executable, '/home/user/Documents/SOUMSOUM/Programme/Page_de_connection.py'])
+        subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Page_de_connection.py'])
 #=====================================================================
 #=====================================================================
 
