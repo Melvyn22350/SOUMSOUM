@@ -26,7 +26,8 @@ class LoginPage:
         self.master.geometry("+%d+%d" % (x, y))
 
     def set_dark_theme(self):
-        self.master.configure(bg='#3498db')
+        dark_gray = '#333333'
+        self.master.configure(bg=dark_gray)
 
     def create_widgets(self):
         bold_font = ("Helvetica", 12, "bold")
@@ -38,15 +39,16 @@ class LoginPage:
 
         # Configure the style to change background color on hover
         style.map(button_style,
-                background=[('active', '#4CAF50')])
+                background=[('active', '#333333')],
+                foreground=[('active', 'white')])
 
-        self.label_username = ttk.Label(self.master, text="Nom d'utilisateur:", background='#3498db', foreground='white', font=bold_font)
+        self.label_username = ttk.Label(self.master, text="Nom d'utilisateur:", background='#333333', foreground='white', font=bold_font)
         self.label_username.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.entry_username = ttk.Entry(self.master)
         self.entry_username.grid(row=1, column=1, padx=10, pady=10)
 
-        self.label_password = ttk.Label(self.master, text="Mot de passe:", background='#3498db', foreground='white', font=bold_font)
+        self.label_password = ttk.Label(self.master, text="Mot de passe:", background='#333333', foreground='white', font=bold_font)
         self.label_password.grid(row=2, column=0, padx=10, pady=10, sticky=tk.W)
 
         self.entry_password = ttk.Entry(self.master, show="*")
@@ -60,7 +62,7 @@ class LoginPage:
 
 
         # Ajout du widget Label pour l'image
-        self.label_image = ttk.Label(self.master)
+        self.label_image = ttk.Label(self.master, borderwidth=0, relief="flat")
         self.label_image.grid(row=0, column=0, columnspan=2, pady=10)
         
         username = "melvyndupas01@gmail.com"
