@@ -28,11 +28,11 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 ### Application Production
 
-- **Fonctionnalités :** Surveillance et mise à jour des ordres de fabrication, visualisation des images des produits, déconnexion sécurisée.
+- **Fonctionnalités :** Surveillance et mise à jour des ordres de fabrication, déconnexion sécurisée.
 
 ## Configuration Requise
 
-Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme. Vous pouvez le faire en modifiant les informations entre les balises `#===========` dans le code.
+Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme.
 
 ## Installation
 
