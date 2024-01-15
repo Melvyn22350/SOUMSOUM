@@ -42,19 +42,14 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
-2.
 
-
-Exécutez le programme.
-
-
-## Dépendances
-
-Installez les bibliothèques nécessaires avec la commande suivante sur linux:
+2.Installez les bibliothèques nécessaires avec la commande suivante sur linux:
 
 ```bash
 pip install pillow
 ```
+
+3.
 
 ## Guide de l'Utilisateur
 
