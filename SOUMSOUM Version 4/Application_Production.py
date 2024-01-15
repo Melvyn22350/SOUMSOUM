@@ -7,7 +7,6 @@ import base64
 from PIL import Image, ImageTk, ImageOps
 import io
 import datetime
-from io import BytesIO
 
 class OdooAPI:
     def __init__(self, url, db, username, password):
@@ -235,34 +234,36 @@ class OdooAPI:
             print("Échec de l'authentification.")
 
     def set_icon(self, root):
-            url = "http://172.31.11.79:8069"
-            db = "SOUMSOUM"
-            username = "melvyndupas01@gmail.com"
-            password = "123456789"
+        url = "http://172.31.11.79:8069"
+        db = "SOUMSOUM"
+        username = "melvyndupas01@gmail.com"
+        password = "123456789"
 
-            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-            uid = common.authenticate(db, username, password, {})
-            
-            if uid:
-                models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-                company_data = models.execute_kw(db, uid, password,
-                                                'res.company', 'read',
-                                                [1], {'fields': ['logo']})
-                if company_data and company_data[0].get('logo'):
-                    logo_data = company_data[0]['logo']
-                    try:
-                        decoded_logo_data = base64.b64decode(logo_data)
-                        logo_image = Image.open(BytesIO(decoded_logo_data))
-                        logo_tk = ImageTk.PhotoImage(logo_image)
+        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+        uid = common.authenticate(db, username, password, {})
+        
+        if uid:
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+            company_data = models.execute_kw(db, uid, password,
+                                            'res.company', 'read',
+                                            [1], {'fields': ['logo']})
+            if company_data and company_data[0].get('logo'):
+                logo_data = company_data[0]['logo']
+                try:
+                    decoded_logo_data = base64.b64decode(logo_data)
+                    logo_image = Image.open(BytesIO(decoded_logo_data))
+                    logo_tk = ImageTk.PhotoImage(logo_image)
 
-                        # Mettre à jour l'icône de la fenêtre principale
-                        root.iconphoto(True, logo_tk)
-                    except Exception as e:
-                        print(f"Erreur lors du traitement du logo : {e}")
-                else:
-                    print("Logo non trouvé pour la société.")
+                    # Mettre à jour l'icône de la fenêtre principale
+                    root.iconphoto(True, logo_tk)
+                except Exception as e:
+                    print(f"Erreur lors du traitement du logo : {e}")
             else:
-                print("Échec de l'authentification. Veuillez vérifier vos identifiants.")
+                print("Logo non trouvé pour la société.")
+        else:
+            print("Échec de l'authentification. Veuillez vérifier vos identifiants.")
+
+# ... (votre code principal)
 
     def close_program(self, root):
         if root:
