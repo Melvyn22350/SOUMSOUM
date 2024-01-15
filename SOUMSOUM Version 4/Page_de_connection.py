@@ -30,6 +30,16 @@ class LoginPage:
 
     def create_widgets(self):
         bold_font = ("Helvetica", 12, "bold")
+        button_style = "TButton"
+        cursor_style = "hand2"
+
+        # Create a ttk style
+        style = ttk.Style()
+
+        # Configure the style to change background color on hover
+        style.map(button_style,
+                background=[('active', '#4CAF50')])
+
         self.label_username = ttk.Label(self.master, text="Nom d'utilisateur:", background='#3498db', foreground='white', font=bold_font)
         self.label_username.grid(row=1, column=0, padx=10, pady=10, sticky=tk.W)
 
@@ -42,11 +52,11 @@ class LoginPage:
         self.entry_password = ttk.Entry(self.master, show="*")
         self.entry_password.grid(row=2, column=1, padx=10, pady=10)
 
-        self.button_logout = ttk.Button(self.master, text="Quitter", command=self.logout)
+        self.button_logout = ttk.Button(self.master, text="Quitter", command=self.logout, style=button_style, cursor=cursor_style)
         self.button_logout.grid(row=3, column=0, columnspan=2, pady=20, padx=20, sticky=tk.W)
 
-        self.button_login = ttk.Button(self.master, text="Se Connecter", command=self.login)
-        self.button_login.grid(row=3, column=1, columnspan=2, pady=20,  padx=20, sticky=tk.E)
+        self.button_login = ttk.Button(self.master, text="Se Connecter", command=self.login, style=button_style, cursor=cursor_style)
+        self.button_login.grid(row=3, column=1, columnspan=2, pady=20, padx=20, sticky=tk.E)
 
 
         # Ajout du widget Label pour l'image
