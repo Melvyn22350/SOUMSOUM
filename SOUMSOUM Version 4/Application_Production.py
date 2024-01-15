@@ -221,13 +221,6 @@ class OdooAPI:
             self.set_icon(root)
             self.root = root  # Enregistrez la référence à la fenêtre principale
 
-
-
-            # Ajout d'une gestion de fermeture de fenêtre
-            root.protocol("WM_DELETE_WINDOW", lambda: self.close_program(root))
-            self.set_icon(root)
-            self.root = root  # Enregistrez la référence à la fenêtre principale
-
             # Fonction pour centrer la fenêtre après avoir créé tous les éléments graphiques
             def center_window():
                 root.update_idletasks()
@@ -238,13 +231,6 @@ class OdooAPI:
                 root.geometry("+{}+{}".format(x_position, y_position))
 
             center_window()
-
-            # Ajout d'une gestion de fermeture de fenêtre
-            root.protocol("WM_DELETE_WINDOW", lambda: self.close_program(root))
-
-            self.set_icon(root)
-
-            self.root = root  # Enregistrez la référence à la fenêtre principale
 
             root.mainloop()
         else:
