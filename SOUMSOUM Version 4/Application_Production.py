@@ -142,6 +142,10 @@ class OdooAPI:
             tree.heading("Quantité Produite", text="Quantité Produite", anchor="center", command=lambda: self.sort_treeview(tree, "Quantité Produite"))
             tree.heading("Stock Produit", text="Stock Produit", anchor="center", command=lambda: self.sort_treeview(tree, "Stock Produit"))
 
+            # Configurer l'ancrage du texte au centre pour toutes les colonnes
+            for col in ("Ordre ID", "Réference Produit", "Date prévue", "Quantité Produite", "Stock Produit"):
+                tree.column(col, anchor="center")
+
             order_ids = self.get_order_ids()
             for order_id in order_ids:
                 order_info = self.get_order_info(order_id)
@@ -185,15 +189,25 @@ class OdooAPI:
                 new_quantity_produced = quantity_produced_entry.get()
                 self.update_quantity_produced(order_id, new_quantity_produced, tree)
 
-            update_button = tk.Button(root, text="Mettre à jour la quantité produite", command=open_update_interface, fg="black", font=("Helvetica", 12, "bold"), highlightbackground='#3498db')
+            # Créer un style pour les boutons
+            style = ttk.Style()
+            style.configure("TButton", font=("Helvetica", 12, "bold"))
+
+            # Définir le style pour le bouton de déconnexion avec la couleur rouge
+            style.map("TButton",
+                    foreground=[('pressed', 'white'), ('active', 'white')],
+                    background=[('pressed', 'green'), ('active', 'green')])
+
+            # Ajouter le bouton pour mettre à jour la quantité produite
+            update_button = ttk.Button(root, text="Mettre à jour la quantité produite", command=open_update_interface, style="TButton", cursor="hand2")
             update_button.pack(pady=60)
 
             # Ajoute un bouton pour actualiser la fenêtre en la fermant
-            restart_button = tk.Button(root, text="Actualiser la page", command=self.restart_program, fg="white", font=("Helvetica", 12, "bold"), bg='green')
+            restart_button = ttk.Button(root, text="Actualiser la page", command=self.restart_program, style="TButton", cursor="hand2")
             restart_button.pack(side="left", padx=30, pady=30)
 
-            # Ajoute un bouton pour quitter le programme
-            quit_button = tk.Button(root, text="Déconnexion", command=lambda: self.quit_program(root), fg="black", font=("Helvetica", 12, "bold"), bg='red')
+            # Ajoute un bouton pour quitter le programme avec une couleur rouge
+            quit_button = ttk.Button(root, text="Déconnexion", command=lambda: self.quit_program(root), style="TButton", cursor="hand2")
             quit_button.pack(side="right", padx=30, pady=30)
 
             # Fonction pour centrer la fenêtre après avoir créé tous les éléments graphiques
@@ -253,5 +267,5 @@ class OdooAPI:
         tree.heading(column, command=lambda: self.sort_treeview(tree, column))
 
 if __name__ == "__main__":
-    odoo_api = OdooAPI('http://localhost:8069', 'SOUMSOUM', 'melvyndupas01@gmail.com', '123456789')
+    odoo_api = OdooAPI('http://172.31.11.79:8069', 'SOUMSOUM', 'melvyndupas01@gmail.com', '123456789')
     odoo_api.display_and_modify_orders()

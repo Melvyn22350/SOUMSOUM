@@ -44,7 +44,7 @@ class StockUpdaterGUI:
 #=====================================================================
 #=====================================================================
         # Connexion à Odoo
-        url = "http://localhost:8069"
+        url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
