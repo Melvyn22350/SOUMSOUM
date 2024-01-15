@@ -216,6 +216,12 @@ class OdooAPI:
             quit_button = ttk.Button(root, text="Déconnexion", command=lambda: self.quit_program(root), style="Red.TButton", cursor="hand2")
             quit_button.pack(side="right", padx=30, pady=30)
 
+            # Ajout d'une gestion de fermeture de fenêtre
+            root.protocol("WM_DELETE_WINDOW", lambda: self.close_program(root))
+            self.set_icon(root)
+            self.root = root  # Enregistrez la référence à la fenêtre principale
+
+
 
             # Ajout d'une gestion de fermeture de fenêtre
             root.protocol("WM_DELETE_WINDOW", lambda: self.close_program(root))
@@ -232,7 +238,14 @@ class OdooAPI:
                 root.geometry("+{}+{}".format(x_position, y_position))
 
             center_window()
-            
+
+            # Ajout d'une gestion de fermeture de fenêtre
+            root.protocol("WM_DELETE_WINDOW", lambda: self.close_program(root))
+
+            self.set_icon(root)
+
+            self.root = root  # Enregistrez la référence à la fenêtre principale
+
             root.mainloop()
         else:
             print("Échec de l'authentification.")
