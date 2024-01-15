@@ -265,6 +265,7 @@ class OdooAPI:
         for index, (val, k) in enumerate(items):
             tree.move(k, '', index)
         tree.heading(column, command=lambda: self.sort_treeview(tree, column))
+        
 
 if __name__ == "__main__":
     odoo_api = OdooAPI('http://172.31.11.79:8069', 'SOUMSOUM', 'melvyndupas01@gmail.com', '123456789')
