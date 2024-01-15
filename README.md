@@ -34,21 +34,23 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme.
 
-## Installation
+## Installation pour linux
 
-1. Clonez ce référentiel.
+1. Clonez ce référentiel sur un terminal linux:
 
 ```bash
 git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
+2.
+
 
 Exécutez le programme.
 
 
 ## Dépendances
 
-Installez les bibliothèques nécessaires avec la commande suivante :
+Installez les bibliothèques nécessaires avec la commande suivante sur linux:
 
 ```bash
 pip install pillow
@@ -57,9 +59,7 @@ pip install pillow
 ## Guide de l'Utilisateur
 
 Consultez le tableau d'affichage pour obtenir un aperçu complet des ordres de fabrication. Cliquez sur un ID d'ordre pour visualiser l'image du produit associé. Utilisez les champs dédiés pour mettre à jour la quantité produite.
-## Licence
 
-Ce programme est distribué sous la licence MIT. Consultez le fichier LICENSE pour plus de détails.
 ## Contact
 
 Pour toute question ou assistance, veuillez contacter notre équipe informatique à l'adresse tech_support@soumsoum.com.
