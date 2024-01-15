@@ -7,6 +7,7 @@ import base64
 from PIL import Image, ImageTk, ImageOps
 import io
 import datetime
+from io import BytesIO
 
 class OdooAPI:
     def __init__(self, url, db, username, password):
@@ -194,21 +195,32 @@ class OdooAPI:
             style.configure("TButton", font=("Helvetica", 12, "bold"))
 
             # Définir le style pour le bouton de déconnexion avec la couleur rouge
-            style.map("TButton",
+            style.map("Red.TButton",
+                    foreground=[('pressed', 'white'), ('active', 'white')],
+                    background=[('pressed', 'red'), ('active', 'red')])
+            
+            # Définir le style pour le bouton de déconnexion avec la couleur rouge
+            style.map("Green.TButton",
                     foreground=[('pressed', 'white'), ('active', 'white')],
                     background=[('pressed', 'green'), ('active', 'green')])
 
             # Ajouter le bouton pour mettre à jour la quantité produite
-            update_button = ttk.Button(root, text="Mettre à jour la quantité produite", command=open_update_interface, style="TButton", cursor="hand2")
+            update_button = ttk.Button(root, text="Mettre à jour la quantité produite", command=open_update_interface, style="Green.TButton", cursor="hand2")
             update_button.pack(pady=60)
 
             # Ajoute un bouton pour actualiser la fenêtre en la fermant
-            restart_button = ttk.Button(root, text="Actualiser la page", command=self.restart_program, style="TButton", cursor="hand2")
+            restart_button = ttk.Button(root, text="Actualiser la page", command=self.restart_program, style="Green.TButton", cursor="hand2")
             restart_button.pack(side="left", padx=30, pady=30)
 
             # Ajoute un bouton pour quitter le programme avec une couleur rouge
-            quit_button = ttk.Button(root, text="Déconnexion", command=lambda: self.quit_program(root), style="TButton", cursor="hand2")
+            quit_button = ttk.Button(root, text="Déconnexion", command=lambda: self.quit_program(root), style="Red.TButton", cursor="hand2")
             quit_button.pack(side="right", padx=30, pady=30)
+
+
+            # Ajout d'une gestion de fermeture de fenêtre
+            root.protocol("WM_DELETE_WINDOW", lambda: self.close_program(root))
+            self.set_icon(root)
+            self.root = root  # Enregistrez la référence à la fenêtre principale
 
             # Fonction pour centrer la fenêtre après avoir créé tous les éléments graphiques
             def center_window():
@@ -220,23 +232,42 @@ class OdooAPI:
                 root.geometry("+{}+{}".format(x_position, y_position))
 
             center_window()
-
-            # Ajout d'une gestion de fermeture de fenêtre
-            root.protocol("WM_DELETE_WINDOW", lambda: self.close_program(root))
-
-            self.set_icon(root)
-
-            self.root = root  # Enregistrez la référence à la fenêtre principale
-
+            
             root.mainloop()
         else:
             print("Échec de l'authentification.")
 
     def set_icon(self, root):
-        # Charger l'icône avec Pillow
-        icon = tk.PhotoImage(file="/home/user/Documents/SOUMSOUM/Image/SOUMSOUM_icon.png")
-        # Définir l'icône de la fenêtre
-        root.tk.call('wm', 'iconphoto', root._w, icon)
+        url = "http://172.31.11.79:8069"
+        db = "SOUMSOUM"
+        username = "melvyndupas01@gmail.com"
+        password = "123456789"
+
+        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+        uid = common.authenticate(db, username, password, {})
+        
+        if uid:
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+            company_data = models.execute_kw(db, uid, password,
+                                            'res.company', 'read',
+                                            [1], {'fields': ['logo']})
+            if company_data and company_data[0].get('logo'):
+                logo_data = company_data[0]['logo']
+                try:
+                    decoded_logo_data = base64.b64decode(logo_data)
+                    logo_image = Image.open(BytesIO(decoded_logo_data))
+                    logo_tk = ImageTk.PhotoImage(logo_image)
+
+                    # Mettre à jour l'icône de la fenêtre principale
+                    root.iconphoto(True, logo_tk)
+                except Exception as e:
+                    print(f"Erreur lors du traitement du logo : {e}")
+            else:
+                print("Logo non trouvé pour la société.")
+        else:
+            print("Échec de l'authentification. Veuillez vérifier vos identifiants.")
+
+# ... (votre code principal)
 
     def close_program(self, root):
         if root:
