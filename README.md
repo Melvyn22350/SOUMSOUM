@@ -39,7 +39,7 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 1. Clonez ce référentiel.
 
 ```bash
-git clone https://github.com/SOUMSOUM/
+git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
 
