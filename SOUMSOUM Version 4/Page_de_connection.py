@@ -3,7 +3,9 @@ import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
 import subprocess
+import base64
 import sys
+from io import BytesIO
 
 class LoginPage:
     def __init__(self, master):
@@ -14,16 +16,7 @@ class LoginPage:
         self.create_widgets()
         self.set_dark_theme()
 
-
-#=====================================================================
-#=====================================================================
-    def set_icon(self):
-        icon = Image.open("/home/user/Documents/SOUMSOUM/Image/SOUMSOUM_icon.png")
-        icon_tk = ImageTk.PhotoImage(icon)
-        self.master.iconphoto(True, icon_tk)
-#=====================================================================
-#=====================================================================
-        
+    
 
     def center_window(self):
         screen_width = self.master.winfo_screenwidth()
@@ -48,72 +41,103 @@ class LoginPage:
         self.entry_password = ttk.Entry(self.master, show="*")
         self.entry_password.grid(row=2, column=1, padx=10, pady=10)
 
-        # Bouton Déconnexion
         self.button_logout = ttk.Button(self.master, text="Quitter", command=self.logout)
         self.button_logout.grid(row=3, column=0, columnspan=2, pady=20, sticky=tk.W)
 
-        # Bouton Se Connecter
         self.button_login = ttk.Button(self.master, text="Se Connecter", command=self.login)
         self.button_login.grid(row=3, column=1, columnspan=2, pady=20, sticky=tk.E)
 
-
-#=====================================================================
-#=====================================================================
-        # Ajout du widget Label pour l'image avec redimensionnement
-        image_path = "/home/user/Documents/SOUMSOUM/Image/Logo_SOUMSOUM.png"
-        original_image = Image.open(image_path)
-        resized_image = original_image.resize((200, 50))
-        photo = ImageTk.PhotoImage(resized_image)
-        self.label_image = ttk.Label(self.master, image=photo)
-        self.label_image.image = photo  # Stocke la référence à l'image
+        # Ajout du widget Label pour l'image
+        self.label_image = ttk.Label(self.master)
         self.label_image.grid(row=0, column=0, columnspan=2, pady=10)
-#=====================================================================
-#=====================================================================
+        
+        username = "melvyndupas01@gmail.com"
+        password = "123456789"
+        url = "http://172.31.11.79:8069"
+        db = "SOUMSOUM"
+
+        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+        models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+        uid = common.authenticate(db, username, password, {})
+        user_data = models.execute_kw(db, uid, password,'res.users', 'read',[uid], {'fields': ['image_1920']})
+        if user_data and user_data[0].get('image_1920'):
+            image_data = user_data[0]['image_1920']
+            try:
+                decoded_image_data = base64.b64decode(image_data)
+                image = Image.open(BytesIO(decoded_image_data))
+                resized_image = image.resize((200, 50))
+                tk_image = ImageTk.PhotoImage(resized_image)
+
+                # Mettre à jour l'image de l'étiquette existante
+                self.label_image.configure(image=tk_image)
+                self.label_image.image = tk_image
+            except Exception as e:
+                print(f"Erreur lors du traitement de l'image : {e}")
+            else: 
+                print("Image non trouvée pour l'utilisateur.")
+
+
+
+
+    def set_icon(self):
+        url = "http://172.31.11.79:8069"
+        db = "SOUMSOUM"
+        username = "melvyndupas01@gmail.com"
+        password = "123456789"
+
+        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+        uid = common.authenticate(db, username, password, {})
+        
+        if uid:
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+            company_data = models.execute_kw(db, uid, password,
+                                            'res.company', 'read',
+                                            [1], {'fields': ['logo']})
+            if company_data and company_data[0].get('logo'):
+                logo_data = company_data[0]['logo']
+                try:
+                    decoded_logo_data = base64.b64decode(logo_data)
+                    logo_image = Image.open(BytesIO(decoded_logo_data))
+                    logo_tk = ImageTk.PhotoImage(logo_image)
+
+                    # Mettre à jour l'icône de la fenêtre principale
+                    self.master.iconphoto(True, logo_tk)
+                except Exception as e:
+                    print(f"Erreur lors du traitement du logo : {e}")
+            else:
+                print("Logo non trouvé pour la société.")
+        else:
+            print("Échec de l'authentification. Veuillez vérifier vos identifiants.")
+
         
 
     def login(self):
         username = self.entry_username.get()
         password = self.entry_password.get()
-
-
-#=====================================================================
-#=====================================================================
-        url = "http://localhost:8069"
+        url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
-#=====================================================================
-#=====================================================================
-        
 
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         uid = common.authenticate(db, username, password, {})
 
         if uid:
-            print("Connexion réussie!")
+            
             if 'prod' in username:
                 print("Connexion production réussie.")
                 self.master.destroy()
-#=====================================================================
-#=====================================================================
-                subprocess.Popen([sys.executable, '/home/user/Documents/SOUMSOUM/Programme/Application_Production.py'])
-#=====================================================================
-#=====================================================================
+                subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Application_Production.py'])
             elif 'log' in username:
                 print("Connexion logistique réussie.")
                 self.master.destroy()
-#=====================================================================
-#=====================================================================
-                subprocess.Popen([sys.executable, '/home/user/Documents/SOUMSOUM/Programme/Application_Logistique.py'])
-#=====================================================================
-#=====================================================================
+                subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Application_Logistique.py'])
             else:
                 print("Type de connexion non reconnu.")
         else:
             print("Échec de la connexion. Veuillez vérifier vos identifiants.")
 
     def logout(self):
-        # Ajoutez le code de fermeture ici
         print("Déconnexion réussie.")
-        self.master.destroy()  # Fermer la fenêtre principale
+        self.master.destroy()
 
 def main():
     root = tk.Tk()
