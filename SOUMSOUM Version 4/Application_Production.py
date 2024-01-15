@@ -17,7 +17,7 @@ class OdooAPI:
         self.common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         self.uid = self.authenticate()
         self.models = None
-        self.root = None  # Garder une référence à la fenêtre principale
+        self.root = None 
 
     def authenticate(self):
         try:
@@ -166,7 +166,7 @@ class OdooAPI:
             tree.tag_configure('red', foreground='red')
             tree.tag_configure('green', foreground='green')
 
-            tree.pack(pady=10)
+            tree.pack(padx=10, pady=10)
 
             id_label = tk.Label(root, text="Rentrez l'ID de l'ordre de fabrication afin de modifier la quantité produite :", fg="white", font=("Helvetica", 12, "bold"), highlightthickness=0, bg='#3498db')
             id_label.pack(pady=10)
