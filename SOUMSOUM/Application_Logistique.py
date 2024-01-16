@@ -25,12 +25,13 @@ else:
     print(f"Le systeme d'exploitation est {os_name}.")
 
 
-# récupérer le chemin du répertoire courant
-path = os.getcwd()
-print("Le répertoire courant est : " + path)
-# récupérer le nom du répertoire courant
-repn = os.path.basename(path)
-print("Le nom du répertoire est : " + repn)
+# Obtenir le chemin complet du script
+chemin_script = os.path.abspath(os.path.realpath(__file__))
+print(chemin_script)
+
+# Obtenir le chemin du répertoire parent
+repertoire_parent = os.path.dirname(chemin_script)
+print(repertoire_parent)
 
 
 
@@ -222,11 +223,11 @@ class StockUpdaterGUI:
         print("Redirection vers page de connexion.")
         self.master.destroy()  # Fermez la fenêtre actuelle
         if os_name == "Windows":
-            subprocess.Popen([sys.executable, 'SOUMSOUM/Page_De_Connexion.py'])
+            subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
 
 
         else:      
-            subprocess.Popen([sys.executable, 'SOUMSOUM/Page_De_Connexion.py'])
+            subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
             
 def main():
     root = tk.Tk()

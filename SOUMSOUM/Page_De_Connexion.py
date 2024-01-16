@@ -22,14 +22,13 @@ elif os_name == "Linux":
 else:
     print(f"Le systeme d'exploitation est {os_name}.")
 
+# Obtenir le chemin complet du script
+chemin_script = os.path.abspath(os.path.realpath(__file__))
+print(chemin_script)
 
-# récupérer le chemin du répertoire courant
-path = os.getcwd()
-print("Le répertoire courant est : " + path)
-# récupérer le nom du répertoire courant
-repn = os.path.basename(path)
-print("Le nom du répertoire est : " + repn)
-
+# Obtenir le chemin du répertoire parent
+repertoire_parent = os.path.dirname(chemin_script)
+print(repertoire_parent)
 
 class LoginPage:
     def __init__(self, master):
@@ -160,16 +159,16 @@ class LoginPage:
                 print("Connexion production reussie.")
                 self.master.destroy()
                 if os_name=="Windows":
-                    subprocess.Popen([sys.executable, 'SOUMSOUM/Application_Production.py'])
+                    subprocess.Popen([sys.executable, f'{repertoire_parent}//Application_Production.py'])
                 else:                            
-                    subprocess.Popen([sys.executable, 'SOUMSOUM/Application_Production.py'])
+                    subprocess.Popen([sys.executable, f'{repertoire_parent}//Application_Production.py'])
             elif 'log' in username:
                 print("Connexion logistique reussie.")
                 self.master.destroy()
                 if os_name=="Windows":
-                    subprocess.Popen([sys.executable, 'SOUMSOUM/Application_Logistique.py'])
+                    subprocess.Popen([sys.executable, f'{repertoire_parent}//Application_Logistique.py'])
                 else:         
-                    subprocess.Popen([sys.executable, 'SOUMSOUM/Application_Logistique.py'])
+                    ssubprocess.Popen([sys.executable, f'{repertoire_parent}//Application_Logistique.py'])
             else:
                 print("Type de connexion non reconnu.")
         else:
