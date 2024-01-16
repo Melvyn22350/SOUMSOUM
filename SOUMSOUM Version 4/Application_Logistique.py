@@ -226,7 +226,7 @@ class StockUpdaterGUI:
 
 
         else:      
-            subprocess.Popen([sys.executable, 'SOUMSOUM Version 4/Page_de_connection.py'])
+            subprocess.Popen([sys.executable, 'Page_de_connection.py'])
             
 def main():
     root = tk.Tk()
