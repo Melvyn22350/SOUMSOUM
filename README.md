@@ -37,6 +37,13 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 ## Installation pour linux
 
 1. Clonez ce référentiel sur un terminal linux:
+Utilisez la commande cd pour vous déplacer dans le répertoire où vous souhaitez cloner le dépôt. Par exemple :
+
+```bash
+cd chemin/vers/le/repertoire
+```
+
+Utilisez la commande git clone pour cloner le dépôt :
 
 ```bash
 git clone https://github.com/Melvyn22350/SOUMSOUM
