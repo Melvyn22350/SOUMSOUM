@@ -73,12 +73,12 @@ sudo apt upgrade python3.9
 
 7. Télécharger l'extension suivante :
 
-  Nom : Python
-  ID : ms-python.python
-  Description : IntelliSense (Pylance), Linting, Debugging (Python Debugger), code formatting, refactoring, unit tests, and more.
-  Version : 2023.22.1
-  Serveur de publication : Microsoft
-  Lien de la Place de marché pour VS : https://marketplace.visualstudio.com/items?itemName=ms-python.python
+Nom : Python
+ID : ms-python.python
+Description : IntelliSense (Pylance), Linting, Debugging (Python Debugger), code formatting, refactoring, unit tests, and more.
+Version : 2023.22.1
+Serveur de publication : Microsoft
+Lien de la Place de marché pour VS : https://marketplace.visualstudio.com/items?itemName=ms-python.python
 
 8. Ouvrez Visual studio code et cliquez sur "ouvrir le dossier" puis ouvrez le répertoire où vous avez clonez le git.
 
