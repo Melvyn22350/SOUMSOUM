@@ -162,14 +162,14 @@ class LoginPage:
                 if os_name=="Windows":
                     subprocess.Popen([sys.executable, 'Application_Production.py'])
                 else:                            
-                    subprocess.Popen([sys.executable, 'Application_Production.py'])
+                    subprocess.Popen([sys.executable, 'SOUMSOUM/Application_Production.py'])
             elif 'log' in username:
                 print("Connexion logistique reussie.")
                 self.master.destroy()
                 if os_name=="Windows":
                     subprocess.Popen([sys.executable, 'Application_Logistique.py'])
                 else:         
-                    subprocess.Popen([sys.executable, 'Application_Logistique.py'])
+                    subprocess.Popen([sys.executable, 'SOUMSOUM/Application_Logistique.py'])
             else:
                 print("Type de connexion non reconnu.")
         else:
