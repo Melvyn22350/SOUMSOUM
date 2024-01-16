@@ -6,6 +6,22 @@ import subprocess
 import base64
 import sys
 from io import BytesIO
+import platform
+import ctypes
+from ctypes import wintypes
+
+
+# Obtenir le nom du système d'exploitation
+os_name = platform.system()
+
+# Vérifier le système d'exploitation
+if os_name == "Windows":
+    print("Le systeme d'exploitation est Windows.")
+elif os_name == "Linux":
+    print("Le systeme d'exploitation est Linux.")
+else:
+    print(f"Le systeme d'exploitation est {os_name}.")
+
 
 class LoginPage:
     def __init__(self, master):
@@ -57,7 +73,7 @@ class LoginPage:
         self.button_logout = ttk.Button(self.master, text="Quitter", command=self.logout, style=button_style, cursor=cursor_style)
         self.button_logout.grid(row=3, column=0, columnspan=2, pady=20, padx=20, sticky=tk.W)
 
-        self.button_login = ttk.Button(self.master, text="Se Connecter", command=self.login, style=button_style, cursor=cursor_style)
+        self.button_login = ttk.Button(self.master, text="Se connecter", command=self.login, style=button_style, cursor=cursor_style)
         self.button_login.grid(row=3, column=1, columnspan=2, pady=20, padx=20, sticky=tk.E)
 
 
@@ -115,9 +131,9 @@ class LoginPage:
                 except Exception as e:
                     print(f"Erreur lors du traitement du logo : {e}")
             else:
-                print("Logo non trouvé pour la société.")
+                print("Logo non trouve pour la societe.")
         else:
-            print("Échec de l'authentification. Veuillez vérifier vos identifiants.")
+            print("Echec de l'authentification. Veuillez verifier vos identifiants.")
 
         
 
@@ -131,22 +147,29 @@ class LoginPage:
         uid = common.authenticate(db, username, password, {})
 
         if uid:
-            
+
             if 'prod' in username:
-                print("Connexion production réussie.")
+                print("Connexion production reussie.")
                 self.master.destroy()
-                subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Application_Production.py'])
+                if os_name=="Windows":
+                    subprocess.Popen([sys.executable, 'Application_Production.py'])
+                else:         
+                    subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Application_Production.py'])
+                
             elif 'log' in username:
-                print("Connexion logistique réussie.")
+                print("Connexion logistique reussie.")
                 self.master.destroy()
-                subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Application_Logistique.py'])
+                if os_name=="Windows":
+                    subprocess.Popen([sys.executable, 'Application_Logistique.py'])
+                else:         
+                    subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Application_Logistique.py'])
             else:
                 print("Type de connexion non reconnu.")
         else:
-            print("Échec de la connexion. Veuillez vérifier vos identifiants.")
+            print("Echec de la connexion. Veuillez verifier vos identifiants.")
 
     def logout(self):
-        print("Déconnexion réussie.")
+        print("Deconnexion reussie.")
         self.master.destroy()
 
 def main():
