@@ -43,13 +43,31 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
 
-2.Installez les bibliothèques nécessaires avec la commande suivante sur linux:
+2. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
 
 ```bash
 pip install pillow
 ```
 
-3.
+3. Installer la version de python3.9 ou supérieur avec la commande sur linux :
+
+```bash
+sudo apt install python3.9
+```
+
+4. Connecter vous au réseau wifi : afpicfai_wifi_guests.
+
+5. Installer Visual Studio Code avec ce lien : https://code.visualstudio.com/download
+
+6. Télécharger les extensions suivantes : 
+
+## Installation pour Windows
+
+1. 
+
+
+
+
 
 ## Guide de l'Utilisateur
 
