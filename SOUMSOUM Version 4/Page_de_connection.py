@@ -9,7 +9,7 @@ from io import BytesIO
 import platform
 import ctypes
 from ctypes import wintypes
-
+import os
 
 # Obtenir le nom du système d'exploitation
 os_name = platform.system()
@@ -21,6 +21,14 @@ elif os_name == "Linux":
     print("Le systeme d'exploitation est Linux.")
 else:
     print(f"Le systeme d'exploitation est {os_name}.")
+
+
+# récupérer le chemin du répertoire courant
+path = os.getcwd()
+print("Le répertoire courant est : " + path)
+# récupérer le nom du répertoire courant
+repn = os.path.basename(path)
+print("Le nom du répertoire est : " + repn)
 
 
 class LoginPage:
@@ -153,16 +161,15 @@ class LoginPage:
                 self.master.destroy()
                 if os_name=="Windows":
                     subprocess.Popen([sys.executable, 'Application_Production.py'])
-                else:         
-                    subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Application_Production.py'])
-                
+                else:                            
+                    subprocess.Popen([sys.executable, 'SOUMSOUM Version 4/Application_Production.py'])
             elif 'log' in username:
                 print("Connexion logistique reussie.")
                 self.master.destroy()
                 if os_name=="Windows":
                     subprocess.Popen([sys.executable, 'Application_Logistique.py'])
                 else:         
-                    subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Application_Logistique.py'])
+                    subprocess.Popen([sys.executable, 'SOUMSOUM Version 4/Application_Logistique.py'])
             else:
                 print("Type de connexion non reconnu.")
         else:

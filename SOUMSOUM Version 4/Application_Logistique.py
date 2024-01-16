@@ -11,7 +11,7 @@ from tkinter import StringVar
 import ctypes
 from ctypes import wintypes
 import platform
-
+import os
 
 # Obtenir le nom du système d'exploitation
 os_name = platform.system()
@@ -23,6 +23,15 @@ elif os_name == "Linux":
     print("Le systeme d'exploitation est Linux.")
 else:
     print(f"Le systeme d'exploitation est {os_name}.")
+
+
+# récupérer le chemin du répertoire courant
+path = os.getcwd()
+print("Le répertoire courant est : " + path)
+# récupérer le nom du répertoire courant
+repn = os.path.basename(path)
+print("Le nom du répertoire est : " + repn)
+
 
 
 class StockUpdaterGUI:
@@ -217,7 +226,7 @@ class StockUpdaterGUI:
 
 
         else:      
-            subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Page_de_connection.py'])
+            subprocess.Popen([sys.executable, 'SOUMSOUM Version 4/Page_de_connection.py'])
             
 def main():
     root = tk.Tk()
