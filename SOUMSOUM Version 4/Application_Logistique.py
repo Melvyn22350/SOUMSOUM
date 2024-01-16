@@ -50,11 +50,15 @@ class StockUpdaterGUI:
     def create_widgets(self):
         self.tree = ttk.Treeview(self.master, columns=("Nom", "Référence", "Prix", "Quantité en stock"))
         self.tree.heading("#0", text="ID")
-        self.tree.heading("Nom", text="Nom de l'article")
-        self.tree.heading("Référence", text="Référence")
-        self.tree.heading("Prix", text="Prix")
-        self.tree.heading("Quantité en stock", text="Quantité en stock")
+        self.tree.heading("Nom", text="Nom de l'article", anchor=tk.CENTER)
+        self.tree.heading("Référence", text="Référence", anchor=tk.CENTER)
+        self.tree.heading("Prix", text="Prix", anchor=tk.CENTER)
+        self.tree.heading("Quantité en stock", text="Quantité en stock", anchor=tk.CENTER)
         self.tree.grid(row=0, column=0, columnspan=2, padx=10, pady=10, sticky=tk.W)
+
+        # Centrer le texte dans chaque colonne
+        for col in ("Nom", "Référence", "Prix", "Quantité en stock"):
+            self.tree.column(col, anchor=tk.CENTER)
 
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
