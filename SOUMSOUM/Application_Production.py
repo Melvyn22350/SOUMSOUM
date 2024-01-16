@@ -276,15 +276,12 @@ class OdooAPI:
         print("Redirection vers page de connexion.")
         self.master = master
         self.master.destroy()  # Fermez la fenêtre actuelle
-        def redirect_to_login(self):
-        print("Redirection vers page de connexion.")
-        self.master.destroy()  # Fermez la fenêtre actuelle
         if os_name == "Windows":
-            subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
+            subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_de_connexion.py'])
 
 
         else:      
-            subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
+            subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_de_connexion.py'])
             
 #====================================================================
 #====================================================================
