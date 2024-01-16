@@ -18,7 +18,8 @@ class OdooAPI:
         self.common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         self.uid = self.authenticate()
         self.models = None
-        self.root = None 
+        self.root = None
+        self.status_column = "Statut de la Commande"
 
     def authenticate(self):
         try:
@@ -46,7 +47,7 @@ class OdooAPI:
                 self.db, self.uid, self.password,
                 'mrp.production', 'search_read',
                 [[['id', '=', order_id]]],
-                {'fields': ['name', 'product_id', 'date_planned_start', 'product_qty', 'qty_producing']}
+                {'fields': ['name', 'product_id', 'date_planned_start', 'product_qty', 'qty_producing', 'state']}
             )
             return order_info
         except Exception as e:
@@ -64,6 +65,7 @@ class OdooAPI:
                     order_info = order_info[0]
                     product_ref = order_info.get('product_id', '')
                     date_planned = order_info.get('date_planned_start', '')
+                    order_status = order_info.get('state', '')
 
                     # Mettre à jour la quantité produite dans Odoo
                     self.models.execute_kw(
@@ -75,7 +77,7 @@ class OdooAPI:
 
                     # Mettre à jour la quantité produite dans le tableau
                     product_qty = order_info.get('product_qty', '')
-                    tree.item(order_id, values=(order_id, product_ref, date_planned, new_quantity_produced, product_qty))
+                    tree.item(order_id, values=(order_id, product_ref, date_planned, new_quantity_produced, product_qty, order_status))
                 else:
                     print(f"Aucune information trouvée pour l'ordre de fabrication avec l'ID {order_id}")
             else:
@@ -84,44 +86,6 @@ class OdooAPI:
             print("Veuillez entrer un nombre valide pour la quantité produite.")
         except Exception as e:
             print(f"Erreur lors de la mise à jour de la quantité produite : {e}")
-
-    def display_article_image(self, event, article_id):
-        try:
-            # Récupérer l'image associée à l'article
-            article_image = self.models.execute_kw(
-                self.db, self.uid, self.password,
-                'product.template', 'read',
-                [int(article_id)],
-                {'fields': ['image_1920']}
-            )
-
-            if article_image and 'image_1920' in article_image[0]:
-                # Afficher l'image dans une nouvelle fenêtre
-                image_data = article_image[0]['image_1920']
-                image = Image.open(io.BytesIO(base64.b64decode(image_data)))
-                image.thumbnail((500, 500))  # Ajuster la taille de l'image
-
-                # Inverser les couleurs de l'image (optionnel)
-                inverted_image = ImageOps.invert(image)
-
-                tk_image = ImageTk.PhotoImage(inverted_image)
-
-                # Créer une fenêtre pour afficher l'image
-                image_window = tk.Toplevel()
-                image_window.title("Image de l'article")
-
-                # Ajouter un Label pour afficher l'image
-                image_label = tk.Label(image_window, image=tk_image)
-                image_label.image = tk_image
-                image_label.pack()
-
-                # Lancer la boucle principale de la fenêtre
-                image_window.mainloop()
-            else:
-                # Aucune image trouvée, afficher un message
-                print("Aucune image disponible pour cet article.")
-        except Exception as e:
-            print(f"Erreur lors de la récupération de l'image : {e}")
 
     def display_and_modify_orders(self):
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(self.url))
@@ -133,18 +97,17 @@ class OdooAPI:
             root = tk.Tk()
             root.title("Informations et Modification des Ordres de Fabrication - Odoo")
 
-            # Changer la couleur de fond à une couleur bleue
             root.configure(bg='#3498db')
 
-            tree = ttk.Treeview(root, columns=("Ordre ID", "Réference Produit", "Date prévue", "Quantité Produite", "Stock Produit"), show="headings")
+            tree = ttk.Treeview(root, columns=("Ordre ID", "Réference Produit", "Date prévue", "Quantité Produite", "Stock Produit", self.status_column), show="headings")
             tree.heading("Ordre ID", text="Ordre ID", anchor="center", command=lambda: self.sort_treeview(tree, "Ordre ID"))
             tree.heading("Réference Produit", text="Réference Produit", anchor="center", command=lambda: self.sort_treeview(tree, "Réference Produit"))
             tree.heading("Date prévue", text="Date prévue", anchor="center", command=lambda: self.sort_treeview(tree, "Date prévue"))
             tree.heading("Quantité Produite", text="Quantité Produite", anchor="center", command=lambda: self.sort_treeview(tree, "Quantité Produite"))
             tree.heading("Stock Produit", text="Stock Produit", anchor="center", command=lambda: self.sort_treeview(tree, "Stock Produit"))
+            tree.heading(self.status_column, text=self.status_column, anchor="center", command=lambda: self.sort_treeview(tree, self.status_column))
 
-            # Configurer l'ancrage du texte au centre pour toutes les colonnes
-            for col in ("Ordre ID", "Réference Produit", "Date prévue", "Quantité Produite", "Stock Produit"):
+            for col in ("Ordre ID", "Réference Produit", "Date prévue", "Quantité Produite", "Stock Produit", self.status_column):
                 tree.column(col, anchor="center")
 
             order_ids = self.get_order_ids()
@@ -156,72 +119,55 @@ class OdooAPI:
                     date_planned = order_info.get('date_planned_start', '')
                     qty_producing = order_info.get('qty_producing', '')
                     product_qty = order_info.get('product_qty', '')
+                    order_status = order_info.get('state', '')
 
-                    # Vérifier si la date est dépassée
                     today = datetime.datetime.today().strftime('%Y-%m-%d')
                     date_style = 'green' if date_planned >= today else 'red'
 
-                    # Ajouter la ligne avec le gestionnaire d'événements et la couleur de texte
-                    tree.insert("", "end", iid=order_id, values=(order_id, product_ref, date_planned, qty_producing, product_qty), tags=(date_style,))
-                    
-                    # Lier la fonction display_article_image à l'événement de clic
-                    tree.tag_bind(order_id, "<Button-1>", lambda event, id=product_ref: self.display_article_image(event, id))
+                    tree.insert("", "end", iid=order_id, values=(order_id, product_ref, date_planned, qty_producing, product_qty, order_status), tags=(date_style,))
 
-            # Configurer les tags pour définir la couleur du texte
             tree.tag_configure('red', foreground='red')
             tree.tag_configure('green', foreground='green')
 
             tree.pack(padx=10, pady=10)
 
-            id_label = tk.Label(root, text="Rentrez l'ID de l'ordre de fabrication afin de modifier la quantité produite :", fg="white", font=("Helvetica", 12, "bold"), highlightthickness=0, bg='#3498db')
+            id_label = tk.Label(root, text="Rentrer l'ID de l'ordre de fabrication afin de modifier la quantité produite :", fg="white", font=("Helvetica", 12, "bold"), highlightthickness=0, bg='#3498db')
             id_label.pack(pady=10)
 
             id_entry = tk.Entry(root)
             id_entry.pack(pady=10)
 
-            quantity_produced_label = tk.Label(root, text="Quantité produite actuelle :", fg="white", font=("Helvetica", 12, "bold"), highlightthickness=0, background='#3498db')
+            quantity_produced_label = tk.Label(root, text="Quantité produite actuelle :", fg="white", font=("Helvetica", 12, "bold"),
+            highlightthickness=0, background='#3498db')
             quantity_produced_label.pack(pady=10)
 
             quantity_produced_entry = tk.Entry(root)
             quantity_produced_entry.pack(pady=10)
 
-            def open_update_interface():
-                order_id = id_entry.get()
-                new_quantity_produced = quantity_produced_entry.get()
-                self.update_quantity_produced(order_id, new_quantity_produced, tree)
-
-            # Créer un style pour les boutons
             style = ttk.Style()
             style.configure("TButton", font=("Helvetica", 12, "bold"))
 
-            # Définir le style pour le bouton de déconnexion avec la couleur rouge
             style.map("Red.TButton",
                     foreground=[('pressed', 'white'), ('active', 'white')],
                     background=[('pressed', 'red'), ('active', 'red')])
-            
-            # Définir le style pour le bouton de déconnexion avec la couleur rouge
+
             style.map("Green.TButton",
                     foreground=[('pressed', 'white'), ('active', 'white')],
                     background=[('pressed', 'green'), ('active', 'green')])
 
-            # Ajouter le bouton pour mettre à jour la quantité produite
-            update_button = ttk.Button(root, text="Mettre à jour la quantité produite", command=open_update_interface, style="Green.TButton", cursor="hand2")
+            update_button = ttk.Button(root, text="Mettre à jour la quantité produite", command=lambda: self.update_quantity_produced(id_entry.get(), quantity_produced_entry.get(), tree), style="Green.TButton", cursor="hand2")
             update_button.pack(pady=60)
 
-            # Ajoute un bouton pour actualiser la fenêtre en la fermant
             restart_button = ttk.Button(root, text="Actualiser la page", command=self.restart_program, style="Green.TButton", cursor="hand2")
             restart_button.pack(side="left", padx=30, pady=30)
 
-            # Ajoute un bouton pour quitter le programme avec une couleur rouge
             quit_button = ttk.Button(root, text="Déconnexion", command=lambda: self.quit_program(root), style="Red.TButton", cursor="hand2")
             quit_button.pack(side="right", padx=30, pady=30)
 
-            # Ajout d'une gestion de fermeture de fenêtre
             root.protocol("WM_DELETE_WINDOW", lambda: self.close_program(root))
             self.set_icon(root)
-            self.root = root  # Enregistrez la référence à la fenêtre principale
+            self.root = root
 
-            # Fonction pour centrer la fenêtre après avoir créé tous les éléments graphiques
             def center_window():
                 root.update_idletasks()
                 screen_width = root.winfo_screenwidth()
@@ -257,7 +203,6 @@ class OdooAPI:
                     logo_image = Image.open(BytesIO(decoded_logo_data))
                     logo_tk = ImageTk.PhotoImage(logo_image)
 
-                    # Mettre à jour l'icône de la fenêtre principale
                     root.iconphoto(True, logo_tk)
                 except Exception as e:
                     print(f"Erreur lors du traitement du logo : {e}")
@@ -266,22 +211,21 @@ class OdooAPI:
         else:
             print("Échec de l'authentification. Veuillez vérifier vos identifiants.")
 
-# ... (votre code principal)
+    def on_treeview_click(self, event, order_id, id_entry):
+        id_entry.delete(0, tk.END)
+        id_entry.insert(0, order_id)
 
     def close_program(self, root):
         if root:
             root.destroy()
 
     def restart_program(self):
-        # Ne redémarre le programme que s'il existe une fenêtre principale
         if self.root:
             self.close_program(self.root)
-            self.display_and_modify_orders()  # Actualiser la page
+            self.display_and_modify_orders()
 
     def quit_program(self, root):
-        # Ajoutez le code pour quitter le programme ici
         print("Programme fermé.")
-        # Redirigez vers la page de connexion (vous devez implémenter cette fonction)
         self.redirect_to_login(root)
 
     def redirect_to_login(self, root):
