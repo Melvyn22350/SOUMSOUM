@@ -92,7 +92,9 @@ sudo apt upgrade python3.9
 
 https://git-scm.com/download/win
 
-Appuyez uniquement sur Next et laisser les choix par défaut.
+sélectionner 64-bit Git for Windows Setup.
+
+Une fois télécharger, pour l'installation appuyez uniquement sur Next et laisser les choix par défaut.
 
 2. Installer Visual Studio Code depuis ce lien :
 
@@ -104,9 +106,10 @@ Installer Visual Studio Code avec ce lien : https://code.visualstudio.com/downlo
 python3
 ```
 Microsoft store s'ouvre puis cliquez sur obtenir.
-Verifier si l'installation s'est bien passée en marquant "python --version" dans l'invité de commande
 
-4. Installer Pillow et pip via l'invité de commande grace à cette commande :
+4. Verifier si l'installation s'est bien passée en marquant "python --version" dans l'invité de commande
+
+5. Installer Pillow et pip via l'invité de commande grace à cette commande :
 
 ```bash
 python3 -m pip install --upgrade pip
@@ -116,7 +119,7 @@ python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade Pillow
 ```
 
-5. Ouvrir Git Bash afin de récupérer les fichiers nécessaires au fonctionnement de l'application
+6. Ouvrir Git Bash afin de récupérer les fichiers nécessaires au fonctionnement de l'application
 
  Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
 
@@ -131,7 +134,7 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
 
-6. Ouvrir Visual Studio Code puis télécharger l'éxtension python : 
+7. Ouvrir Visual Studio Code puis télécharger l'éxtension python : 
 
        Nom : Python
        ID : ms-python.python
@@ -140,11 +143,11 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
        Serveur de publication : Microsoft
        Lien de la Place de marché pour VS : https://marketplace.visualstudio.com/items?itemName=ms-python.python
 
-7. Dans le menu Explorer de Visual Studio Code, cliquez sur ouvrir un dossier et choisissez celui ou vous avez télécharger le git, le répertoire s'appelle "SOUMSOUM"
+8. Dans le menu Explorer de Visual Studio Code, cliquez sur ouvrir un dossier et choisissez celui ou vous avez télécharger le git, le répertoire s'appelle "SOUMSOUM"
 
-8. Ouvrez le fichier "Page_de_connexion.py" présent dans le dosser "SOUMSOUM", depuis visual studio code et éxecuter le fichier python.
+9. Ouvrez le fichier "Page_de_connexion.py" présent dans le dosser "SOUMSOUM", depuis visual studio code et éxecuter le fichier python.
   
-9. Connectez vous à l'aide de vos identifiants : production ou logistique ainsi que vos mot de passe associé.
+10. Connectez vous à l'aide de vos identifiants : production ou logistique ainsi que vos mot de passe associé.
 
 
 ## Guide de l'Utilisateur
