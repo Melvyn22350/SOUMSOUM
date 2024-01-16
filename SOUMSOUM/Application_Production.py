@@ -277,7 +277,7 @@ class OdooAPI:
         self.master = master
         self.master.destroy()  # Fermez la fenêtre actuelle
         if os_name == "Windows":
-            subprocess.Popen([sys.executable, 'Page_de_connection.py'])
+            subprocess.Popen([sys.executable, 'SOUMSOUM/Page_de_connection.py'])
  
  
         else:      
