@@ -28,38 +28,33 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 ### Application Production
 
-- **Fonctionnalités :** Surveillance et mise à jour des ordres de fabrication, visualisation des images des produits, déconnexion sécurisée.
+- **Fonctionnalités :** Surveillance et mise à jour des ordres de fabrication, déconnexion sécurisée.
 
 ## Configuration Requise
 
-Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme. Vous pouvez le faire en modifiant les informations entre les balises `#===========` dans le code.
+Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme.
 
-## Installation
+## Installation pour linux
 
-1. Clonez ce référentiel.
+1. Clonez ce référentiel sur un terminal linux:
 
 ```bash
 git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
 
-Exécutez le programme.
-
-
-## Dépendances
-
-Installez les bibliothèques nécessaires avec la commande suivante :
+2.Installez les bibliothèques nécessaires avec la commande suivante sur linux:
 
 ```bash
 pip install pillow
 ```
 
+3.
+
 ## Guide de l'Utilisateur
 
 Consultez le tableau d'affichage pour obtenir un aperçu complet des ordres de fabrication. Cliquez sur un ID d'ordre pour visualiser l'image du produit associé. Utilisez les champs dédiés pour mettre à jour la quantité produite.
-## Licence
 
-Ce programme est distribué sous la licence MIT. Consultez le fichier LICENSE pour plus de détails.
 ## Contact
 
 Pour toute question ou assistance, veuillez contacter notre équipe informatique à l'adresse tech_support@soumsoum.com.

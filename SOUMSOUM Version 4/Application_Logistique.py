@@ -4,26 +4,6 @@ import io
 import base64
 import sys
 import subprocess
-from tkinter import ttk
-from PIL import Image, ImageTk
-from io import BytesIO
-from tkinter import StringVar
-import ctypes
-from ctypes import wintypes
-import platform
-
-
-# Obtenir le nom du système d'exploitation
-os_name = platform.system()
-
-# Vérifier le système d'exploitation
-if os_name == "Windows":
-    print("Le systeme d'exploitation est Windows.")
-elif os_name == "Linux":
-    print("Le systeme d'exploitation est Linux.")
-else:
-    print(f"Le systeme d'exploitation est {os_name}.")
-
 
 class StockUpdaterGUI:
     def __init__(self, master):
@@ -35,33 +15,15 @@ class StockUpdaterGUI:
         self.center_window()
 
     def set_icon(self):
-        url = "http://172.31.11.79:8069"
-        db = "SOUMSOUM"
-        username = "melvyndupas01@gmail.com"
-        password = "123456789"
-
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
-
-        if uid:
-            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-            company_data = models.execute_kw(db, uid, password,
-                                            'res.company', 'read',
-                                            [1], {'fields': ['logo']})
-            if company_data and company_data[0].get('logo'):
-                logo_data = company_data[0]['logo']
-                try:
-                    decoded_logo_data = base64.b64decode(logo_data)
-                    logo_image = Image.open(BytesIO(decoded_logo_data))
-                    logo_tk = ImageTk.PhotoImage(logo_image)
-                    # Mettre à jour l'icône de la fenêtre principale
-                    self.master.iconphoto(True, logo_tk)
-                except Exception as e:
-                    print(f"Erreur lors du traitement du logo : {e}")
-            else:
-                print("Logo non trouvé pour la sociéte.")
-        else:
-            print("Échec de l'authentification. Veuillez verifier vos identifiants.")
+        # Charger l'icône avec Pillow
+        icon = Image.open("/home/user/Documents/SOUMSOUM/Image/SOUMSOUM_icon.png")
+        # Convertir l'icône en format Tkinter
+        icon_tk = ImageTk.PhotoImage(icon)
+        # Définir l'icône de la fenêtre
+        self.master.iconphoto(True, icon_tk)
+#=====================================================================
+#=====================================================================
+        
 
     def create_widgets(self):
         self.tree = ttk.Treeview(self.master, columns=("Nom", "Référence", "Prix", "Quantité en stock"))
@@ -206,19 +168,19 @@ class StockUpdaterGUI:
         self.master.configure(bg=color)
 
     def quit_program(self):
-        print("Programme ferme.")
+        # Ajoutez le code pour quitter le programme ici
+        print("Programme fermé.")
+        # Redirigez vers le programme Page_de_connection_V2.py
         self.redirect_to_login()
 
     def redirect_to_login(self):
         print("Redirection vers page de connexion.")
         self.master.destroy()  # Fermez la fenêtre actuelle
-        if os_name == "Windows":
-            subprocess.Popen([sys.executable, 'Page_de_connection.py'])
+        subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Page_de_connection.py'])
+#=====================================================================
+#=====================================================================
 
 
-        else:      
-            subprocess.Popen([sys.executable, '/home/user/Documents/SOURCE/SOUMSOUM/SOUMSOUM Version 4/Page_de_connection.py'])
-            
 def main():
     root = tk.Tk()
     app = StockUpdaterGUI(root)
