@@ -37,10 +37,10 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 ## Installation pour linux
 
 1. Clonez ce référentiel sur un terminal linux:
-Utilisez la commande cd pour vous déplacer dans le répertoire suivant.
+Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
 
 ```bash
-cd Documents
+cd Nom/De/Votre/Repertoire
 ```
 
 Utilisez la commande git clone pour cloner le dépôt :
@@ -80,9 +80,9 @@ Version : 2023.22.1
 Serveur de publication : Microsoft
 Lien de la Place de marché pour VS : https://marketplace.visualstudio.com/items?itemName=ms-python.python
 
-8. Ouvrez Visual studio code et cliquez sur "ouvrir le dossier" puis ouvrez le répertoire Documents/SOUMSOUM.
+8. Ouvrez Visual studio code et cliquez sur "ouvrir le dossier" puis ouvrez le répertoire où vous avez clonez le git.
 
-9. Ouvrez le fichier "Page_de_connexion.py" depuis visual studio code et éxecuter le fichier python.
+9. Ouvrez le fichier "Page_de_connexion.py" présent dans le dosser "SOUMSOUM", depuis visual studio code et éxecuter le fichier python.
   
 10. Connectez vous à l'aide de vos identifiants : production ou logistique ainsi que vos mot de passe associé.
 
