@@ -142,7 +142,9 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 7. Dans le menu Explorer de Visual Studio Code, cliquez sur ouvrir un dossier et choisissez celui ou vous avez télécharger le git, le répertoire s'appelle "SOUMSOUM"
 
-8. 
+8. Ouvrez le fichier "Page_de_connexion.py" présent dans le dosser "SOUMSOUM", depuis visual studio code et éxecuter le fichier python.
+  
+9. Connectez vous à l'aide de vos identifiants : production ou logistique ainsi que vos mot de passe associé.
 
 
 ## Guide de l'Utilisateur
