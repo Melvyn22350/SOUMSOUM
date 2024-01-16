@@ -37,10 +37,10 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 ## Installation pour linux
 
 1. Clonez ce référentiel sur un terminal linux:
-Utilisez la commande cd pour vous déplacer dans le répertoire où vous souhaitez cloner le dépôt. Par exemple :
+Utilisez la commande cd pour vous déplacer dans le répertoire suivant.
 
 ```bash
-cd chemin/vers/le/repertoire
+cd Documents
 ```
 
 Utilisez la commande git clone pour cloner le dépôt :
@@ -62,11 +62,29 @@ pip install pillow
 sudo apt install python3.9
 ```
 
-4. Connecter vous au réseau wifi : afpicfai_wifi_guests.
+4. Mettez à jour python3.9 avec la commande sur linux :
 
-5. Installer Visual Studio Code avec ce lien : https://code.visualstudio.com/download
+```bash
+sudo apt upgrade python3.9
+```
+5. Connecter vous au réseau wifi : afpicfai_wifi_guests.
 
-6. Télécharger les extensions suivantes : 
+6. Installer Visual Studio Code avec ce lien : https://code.visualstudio.com/download
+
+7. Télécharger l'extension suivante :
+
+Nom : Python
+ID : ms-python.python
+Description : IntelliSense (Pylance), Linting, Debugging (Python Debugger), code formatting, refactoring, unit tests, and more.
+Version : 2023.22.1
+Serveur de publication : Microsoft
+Lien de la Place de marché pour VS : https://marketplace.visualstudio.com/items?itemName=ms-python.python
+
+8. Ouvrez Visual studio code et cliquez sur "ouvrir le dossier" puis ouvrez le répertoire Documents/SOUMSOUM.
+
+9. Ouvrez le fichier "Page_de_connexion.py" depuis visual studio code et éxecuter le fichier python.
+  
+10. Connectez vous à l'aide de vos identifiants : production ou logistique ainsi que vos mot de passe associé.
 
 ## Installation pour Windows
 
