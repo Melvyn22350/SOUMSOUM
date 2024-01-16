@@ -88,10 +88,61 @@ sudo apt upgrade python3.9
 
 ## Installation pour Windows
 
-1. 
+1. Installer le logiciel git bash depuis ce lien :
 
+https://git-scm.com/download/win
 
+Appuyez uniquement sur Next et laisser les choix par défaut.
 
+2. Installer Visual Studio Code depuis ce lien :
+
+Installer Visual Studio Code avec ce lien : https://code.visualstudio.com/download
+
+3. Installer Python via l'invité de commande :
+
+```bash
+python3
+```
+Microsoft store s'ouvre puis cliquez sur obtenir.
+Verifier si l'installation s'est bien passée en marquant "python --version" dans l'invité de commande
+
+4. Installer Pillow et pip via l'invité de commande grace à cette commande :
+
+```bash
+python3 -m pip install --upgrade pip
+```
+
+```bash
+python3 -m pip install --upgrade Pillow
+```
+
+5. Ouvrir Git Bash afin de récupérer les fichiers nécessaires au fonctionnement de l'application
+
+ Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
+
+```bash
+cd Nom/De/Votre/Repertoire
+```
+
+Utilisez la commande git clone pour cloner le dépôt :
+
+```bash
+git clone https://github.com/Melvyn22350/SOUMSOUM
+
+```
+
+6. Ouvrir Visual Studio Code puis télécharger l'éxtension python : 
+
+       Nom : Python
+       ID : ms-python.python
+       Description : IntelliSense (Pylance), Linting, Debugging (Python Debugger), code formatting, refactoring, unit tests, and more.
+       Version : 2023.22.1
+       Serveur de publication : Microsoft
+       Lien de la Place de marché pour VS : https://marketplace.visualstudio.com/items?itemName=ms-python.python
+
+7. Dans le menu Explorer de Visual Studio Code, cliquez sur ouvrir un dossier et choisissez celui ou vous avez télécharger le git, le répertoire s'appelle "SOUMSOUM"
+
+8. 
 
 
 ## Guide de l'Utilisateur
