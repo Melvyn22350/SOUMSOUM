@@ -37,6 +37,29 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 ## Installation du Docker
 
 ## Installation du Serveur ERP
+Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
+
+1. Clonez ce référentiel sur un terminal linux:
+Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
+
+```bash
+cd Nom/De/Votre/Repertoire
+```
+
+Utilisez la commande git clone pour cloner le dépôt :
+
+```bash
+git clone https://github.com/Melvyn22350/SOUMSOUM
+
+```
+
+2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : http://adresse_ip_de_votre_serveur_contenant_le_docker:8069  exemple : http://172.31.11.79:8069;
+
+3. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
+
+4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier suivant : /home/user/Nom_De_Votre_Repertoire/SOUMSOUM_2024-01-17_10-50-05.zip, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
+
+5. Une fois le Backup réaliser, connecter vous à l'aide de vos identifiant.
 
 ## Installation du Desktop sur linux
 
