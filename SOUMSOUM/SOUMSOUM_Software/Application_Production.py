@@ -14,9 +14,9 @@ from io import BytesIO
 from PIL import Image, ImageTk, ImageOps
 
 
-#====================================================================
-#================== Application de Production =======================
-#====================================================================
+#===========================================================================================================
+#====================== Application de Production ==========================================================
+#===========================================================================================================
 
 
 # Obtenir le nom du système d'exploitation
@@ -37,19 +37,22 @@ print(chemin_script)
 # Obtenir le chemin du répertoire parent
 repertoire_parent = os.path.dirname(chemin_script)
 print(repertoire_parent)
- 
+
+# Classe représentant une interface pour interagir avec l'API Odoo
 class OdooAPI:
     def __init__(self, url, db, username, password):
+        # Initialisation avec les informations de connexion
         self.url = url
         self.db = db
         self.username = username
         self.password = password
         self.common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         self.uid = self.authenticate()
-        self.models = None
-        self.root = None
-        self.status_column = "Statut de la Commande"
+        self.models = None # Instance pour interagir avec les objets Odoo
+        self.root = None # Fenêtre principale de l'interface
+        self.status_column = "Statut de la Commande" # Nom de la colonne d'état dans l'interface
  
+    # Méthode pour effectuer l'authentification auprès du serveur Odoo 
     def authenticate(self):
         try:
             uid = self.common.authenticate(self.db, self.username, self.password, {})
@@ -57,7 +60,8 @@ class OdooAPI:
         except Exception as e:
             print(f"Erreur d'authentification : {e}")
             return None
- 
+
+    # Méthode pour obtenir les identifiants des ordres de fabrication dans les états 'confirmed' et 'progress' 
     def get_order_ids(self):
         try:
             order_ids = self.models.execute_kw(
@@ -69,9 +73,11 @@ class OdooAPI:
         except Exception as e:
             print(f"Erreur lors de la récupération des numéros d'ordre de fabrication : {e}")
             return []
- 
+
+    # Méthode pour obtenir les informations d'une commande de fabrication à partir de son ID 
     def get_order_info(self, order_id):
         try:
+            # Interroger Odoo pour obtenir les détails de la commande avec l'ID spécifié
             order_info = self.models.execute_kw(
                 self.db, self.uid, self.password,
                 'mrp.production', 'search_read',
@@ -82,7 +88,8 @@ class OdooAPI:
         except Exception as e:
             print(f"Erreur lors de la récupération de l'ordre de fabrication : {e}")
             return []
- 
+
+    # Méthode pour mettre à jour la quantité produite pour une commande de fabrication dans Odoo et dans le tableau Treeview 
     def update_quantity_produced(self, order_id, new_quantity_produced, tree):
         try:
             order_id = int(order_id)
@@ -115,8 +122,10 @@ class OdooAPI:
             print("Veuillez entrer un nombre valide pour la quantité produite.")
         except Exception as e:
             print(f"Erreur lors de la mise à jour de la quantité produite : {e}")
- 
+
+    # Méthode pour afficher et modifier les ordres dans l'interface Tkinter
     def display_and_modify_orders(self):
+        # Authentification auprès du serveur Odoo
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(self.url))
         uid = common.authenticate(self.db, self.username, self.password, {})
  
@@ -139,16 +148,19 @@ class OdooAPI:
             root.mainloop()
         else:
             print("Échec de l'authentification.")
- 
+
+    # Méthode pour configurer la fenêtre principale Tkinter 
     def configure_root(self, root):
         root.title("Informations et Modification des Ordres de Fabrication - Odoo")
         root.configure(bg='#3498db')
  
+    # Méthode pour créer et configurer le widget Treeview
     def create_treeview(self, root):
         tree = ttk.Treeview(root, columns=("Ordre ID", "Réference Produit", "Date prévue", "Quantité Produite", "Stock Produit", self.status_column), show="headings")
         self.configure_treeview(tree)
         return tree
- 
+
+    # Méthode pour configurer le widget Treeview
     def configure_treeview(self, tree):
         tree.heading("Ordre ID", text="Ordre ID", anchor="center", command=lambda: self.sort_treeview(tree, "Ordre ID"))
         tree.heading("Réference Produit", text="Réference Produit", anchor="center", command=lambda: self.sort_treeview(tree, "Réference Produit"))
@@ -159,7 +171,8 @@ class OdooAPI:
  
         for col in ("Ordre ID", "Réference Produit", "Date prévue", "Quantité Produite", "Stock Produit", self.status_column):
             tree.column(col, anchor="center")
- 
+
+    # Méthode pour afficher les données dans le widget Treeview
     def display_treeview(self, tree):
         order_ids = self.get_order_ids()
         for order_id in order_ids:
@@ -181,7 +194,8 @@ class OdooAPI:
         tree.tag_configure('green', foreground='green')
  
         tree.pack(padx=10, pady=10)
- 
+
+    # Méthode pour créer l'interface utilisateur
     def create_user_interface(self, root, tree):
         id_label = tk.Label(root, text="ID de l'ordre de fabrication :", fg="white", font=("Helvetica", 12, "bold"), highlightthickness=0, bg='#3498db')
         id_label.pack(pady=10)
@@ -208,7 +222,8 @@ class OdooAPI:
                 background=[('pressed', 'green'), ('active', 'green')])
  
         return id_label, id_entry, quantity_produced_label, quantity_produced_entry, style
- 
+
+    # Méthode pour créer les boutons
     def create_buttons(self, root, tree, id_entry, quantity_produced_entry, style):
         update_button = ttk.Button(root, text="Mettre à jour la quantité produite", command=lambda: self.update_quantity_produced(id_entry.get(), quantity_produced_entry.get(), tree), style="Green.TButton", cursor="hand2")
         update_button.pack(pady=60)
@@ -218,7 +233,8 @@ class OdooAPI:
  
         quit_button = ttk.Button(root, text="Déconnexion", command=lambda: self.quit_program(root), style="Red.TButton", cursor="hand2")
         quit_button.pack(side="right", padx=30, pady=30)
- 
+
+    # Méthode pour centrer la fenêtre principale
     def center_window(self, root):
         root.update_idletasks()
         screen_width = root.winfo_screenwidth()
@@ -228,16 +244,20 @@ class OdooAPI:
         root.geometry("+{}+{}".format(x_position, y_position))
  
     
-#====================================================================
-#====================================================================
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================
+ 
+    # Méthode pour définir l'icône de l'application 
     def set_icon(self, root):
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
-#====================================================================
-#====================================================================
-        
+#===========================================================================================================
+#===========================================================================================================
+
+
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         uid = common.authenticate(db, username, password, {})
         
@@ -261,25 +281,28 @@ class OdooAPI:
         else:
             print("Échec de l'authentification. Veuillez vérifier vos identifiants.")
 
- 
- 
+ # Fonction appelée lorsqu'un élément du Treeview est cliqué, met à jour l'Entry avec l'ID de la commande sélectionnée
     def on_treeview_click(self, event, order_id, id_entry):
         id_entry.delete(0, tk.END)
         id_entry.insert(0, order_id)
- 
+
+# Fonction pour fermer la fenêtre principale de l'interface
     def close_program(self, root):
         if root:
             root.destroy()
- 
+
+# Fonction pour redémarrer le programme en fermant la fenêtre actuelle et en relançant l'affichage des commandes
     def restart_program(self):
         if self.root:
             self.close_program(self.root)
             self.display_and_modify_orders()
- 
+
+# Fonction pour quitter le programme en affichant un message dans la console et redirigeant vers la page de connexion
     def quit_program(self, root):
         print("Programme fermé.")
         self.redirect_to_login(root)
- 
+
+# Fonction pour rediriger vers la page de connexion en fermant la fenêtre actuelle
     def redirect_to_login(self, master):
         print("Redirection vers page de connexion.")
         self.master = master
@@ -289,7 +312,7 @@ class OdooAPI:
         else:      
             subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
 
- 
+# Fonction pour trier les éléments du Treeview en fonction de la colonne spécifiée
     def sort_treeview(self, tree, column):
         items = [(tree.set(k, column), k) for k in tree.get_children('')]
         items.sort()
@@ -297,10 +320,16 @@ class OdooAPI:
             tree.move(k, '', index)
         tree.heading(column, command=lambda: self.sort_treeview(tree, column))
  
-#====================================================================
-#====================================================================
+
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================
+        
+# Exécution de la fonction principale
 if __name__ == "__main__":
     odoo_api = OdooAPI('http://172.31.11.79:8069', 'SOUMSOUM', 'melvyndupas01@gmail.com', '123456789')
+    # Affiche et permet la modification des commandes dans l'interface Odoo    
     odoo_api.display_and_modify_orders()
-#====================================================================
-#====================================================================
+
+#==========================================================================================================
+#==========================================================================================================
