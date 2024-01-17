@@ -1,15 +1,21 @@
 import xmlrpc.client
 import tkinter as tk
-from tkinter import ttk
-from PIL import Image, ImageTk
 import subprocess
 import base64
 import sys
-from io import BytesIO
 import platform
 import ctypes
-from ctypes import wintypes
 import os
+from tkinter import ttk
+from PIL import Image, ImageTk
+from io import BytesIO
+from ctypes import wintypes
+
+
+#===========================================================================================================
+#====================== Application de Connexion ===========================================================
+#===========================================================================================================
+
 
 # Obtenir le nom du système d'exploitation
 os_name = platform.system()
@@ -30,8 +36,11 @@ print(chemin_script)
 repertoire_parent = os.path.dirname(chemin_script)
 print(repertoire_parent)
 
+# Classe représentant la page de connexion
 class LoginPage:
     def __init__(self, master):
+
+        # Initialisation de la fenêtre principale
         self.master = master
         self.master.title("Page de Connexion")
         self.set_icon()
@@ -40,7 +49,7 @@ class LoginPage:
         self.set_dark_theme()
 
     
-
+    # Méthode pour centrer la fenêtre
     def center_window(self):
         screen_width = self.master.winfo_screenwidth()
         screen_height = self.master.winfo_screenheight()
@@ -48,19 +57,21 @@ class LoginPage:
         y = (screen_height - self.master.winfo_reqheight()) / 2
         self.master.geometry("+%d+%d" % (x, y))
 
+    # Méthode pour appliquer un thème sombre
     def set_dark_theme(self):
         dark_gray = '#333333'
         self.master.configure(bg=dark_gray)
 
+    # Méthode pour créer les widgets
     def create_widgets(self):
         bold_font = ("Helvetica", 12, "bold")
         button_style = "TButton"
         cursor_style = "hand2"
 
-        # Create a ttk style
+        # Création d'un style ttk
         style = ttk.Style()
 
-        # Configure the style to change background color on hover
+        # Configuration du style pour changer la couleur de fond au survol
         style.map(button_style,
                 background=[('active', '#333333')],
                 foreground=[('active', 'white')])
@@ -87,11 +98,18 @@ class LoginPage:
         # Ajout du widget Label pour l'image
         self.label_image = ttk.Label(self.master, borderwidth=0, relief="flat")
         self.label_image.grid(row=0, column=0, columnspan=2, pady=10)
-        
-        username = "melvyndupas01@gmail.com"
-        password = "123456789"
+
+
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================   
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
+        username = "melvyndupas01@gmail.com"
+        password = "123456789"
+#===========================================================================================================
+#===========================================================================================================
+        
 
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
@@ -112,11 +130,20 @@ class LoginPage:
                 print(f"Erreur lors du traitement de l'image : {e}")
 
 
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================
+    
+    # Méthode pour définir l'icône de la fenêtre principale
     def set_icon(self):
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
+
+#===========================================================================================================
+#===========================================================================================================
+        
 
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         uid = common.authenticate(db, username, password, {})
@@ -143,13 +170,19 @@ class LoginPage:
             print("Echec de l'authentification. Veuillez verifier vos identifiants.")
 
         
-
+    # Méthode de gestion de la connexion
     def login(self):
         username = self.entry_username.get()
         password = self.entry_password.get()
+
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
-
+#===========================================================================================================
+#===========================================================================================================
+        
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         uid = common.authenticate(db, username, password, {})
 
@@ -173,15 +206,18 @@ class LoginPage:
                 print("Type de connexion non reconnu.")
         else:
             print("Echec de la connexion. Veuillez verifier vos identifiants.")
-
+    
+    # Méthode de gestion de la déconnexion
     def logout(self):
         print("Deconnexion reussie.")
         self.master.destroy()
 
+# Fonction principale
 def main():
     root = tk.Tk()
     app = LoginPage(root)
     root.mainloop()
 
+# Exécution de la fonction principale
 if __name__ == "__main__":
     main()
