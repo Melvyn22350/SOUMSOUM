@@ -127,8 +127,9 @@ python3 -m pip install --upgrade pip
 ```bash
 python3 -m pip install --upgrade Pillow
 ```
-  
-10. Connectez vous à l'aide de vos identifiants : production ou logistique ainsi que vos mot de passe associé.
+6. Aller chercher l'emplacement du dossier que vous venez de cloner, rentrez dans le dossier SOUMSOUM puis effectuer un clique droit sur "Launcher_SOUMSOUM.sh" et séléctionner créer un raccourci et glisser le sur le bureau.
+
+7. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
 
 
 ## Guide de l'Utilisateur
