@@ -42,24 +42,24 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 
 3. Mettez un nom à votre stack puis cliquez sur web editor et écrivez ce script :
 
-     version: '2'
-  services :
-    web:
-      image: odoo:15
-      depends_on:
-        - mydb
-      ports:
-        - "8069:8069"
-      environment:
-       - HOST=mydb
-       - USER=odoo
-       - PASSWORD=myodoo
-    mydb: 
-       image: postgres:13
-       environment:
-         - POSTGRES_DB=postgres
-         - POSTGRES_PASSWORD=myodoo
-         - POSTGRES_USER=odoo
+version: '2'
+services :
+  web:
+    image: odoo:15
+    depends_on:
+      - mydb
+    ports:
+      - "8069:8069"
+    environment:
+     - HOST=mydb
+     - USER=odoo
+     - PASSWORD=myodoo
+  mydb: 
+     image: postgres:13
+     environment:
+       - POSTGRES_DB=postgres
+       - POSTGRES_PASSWORD=myodoo
+       - POSTGRES_USER=odoo
      
 
 ## Installation du Serveur ERP sur une machine virtuelle Linux :
