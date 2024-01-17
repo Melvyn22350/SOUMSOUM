@@ -34,7 +34,9 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme.
 
-## Installation pour linux
+## Installation pour linux : Desktop / serveur ERP / Docker
+
+- **Installation du Desktop** 
 
 1. Clonez ce référentiel sur un terminal linux:
 Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
@@ -67,11 +69,25 @@ sudo apt install python3.9
 ```bash
 sudo apt upgrade python3.9
 ```
-5. Connecter vous au réseau wifi : afpicfai_wifi_guests.
 
-10. Connectez vous à l'aide de vos identifiants : production ou logistique ainsi que vos mot de passe associé.
+5. Sur un terminal, rendre le fichier "Launcher_SOUMSOUM.sh" éxecutable depuis cette commande :
 
-## Installation pour Windows
+```bash
+chmod +x /Chemin/De/Votre/Fichier/Launcher_SOUMSOUM.sh
+```
+
+6. 
+  
+
+10. Lancer le Launcher et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
+
+    
+- **Installation du serveur ERP**
+
+- **Installation du Docker**
+
+  
+## Installation pour Windows : Desktop / serveur Odoo / Docker
 
 1. Installer le logiciel git bash depuis ce lien :
 
