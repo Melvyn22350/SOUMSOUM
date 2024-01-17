@@ -62,6 +62,7 @@ services :
        - POSTGRES_PASSWORD=myodoo
        - POSTGRES_USER=odoo
 ```
+Cliquez ensuite sur deploy the stack et vérifiez que les deux serveurs sont en running.
 
 4. Ouvrir le port 8069 appartenant à la machine virtuelle que vous possédez:
    Aller dans "réglages réseau", "advances", "redirections de ports" dans la case protocole mettez "TCP", dans le "port hôte" et "port invité" écrivez 8069 puis cliquez sur ok.
@@ -83,7 +84,7 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
 
-2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : http://adresse_ip_de_votre_serveur_contenant_le_docker:8069  exemple : http://172.31.11.79:8069;
+2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : http://adresse_ip_de_votre_serveur_contenant_le_docker:8069  exemple : http://172.31.11.79:8069 ou aller sur le docker que vous venez de créer et cliquer sur "8069" dans la colonne "published ports".
 
 3. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
 
