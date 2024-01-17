@@ -42,6 +42,7 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 
 3. Mettez un nom à votre stack puis cliquez sur web editor et écrivez ce script :
 
+```bash
 version: '2'
 services :
   web:
@@ -60,7 +61,9 @@ services :
        - POSTGRES_DB=postgres
        - POSTGRES_PASSWORD=myodoo
        - POSTGRES_USER=odoo
-     
+```
+       
+4. Ouvrir sont port 8069 sur la VM
 
 ## Installation du Serveur ERP sur une machine virtuelle Linux :
 Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
