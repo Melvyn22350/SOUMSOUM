@@ -62,7 +62,7 @@ services :
        - POSTGRES_PASSWORD=myodoo
        - POSTGRES_USER=odoo
 ```
-Cliquez ensuite sur deploy the stack et vérifiez que les deux serveurs sont en running.
+Cliquez ensuite sur "deploy the stack" et vérifiez que les deux serveurs sont en running.
 
 4. Ouvrir le port 8069 appartenant à la machine virtuelle que vous possédez:
    Aller dans "réglages réseau", "advances", "redirections de ports" dans la case protocole mettez "TCP", dans le "port hôte" et "port invité" écrivez 8069 puis cliquez sur ok.
