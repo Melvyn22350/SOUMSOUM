@@ -62,8 +62,9 @@ services :
        - POSTGRES_PASSWORD=myodoo
        - POSTGRES_USER=odoo
 ```
-       
-4. Ouvrir sont port 8069 sur la VM
+
+4. Ouvrir le port 8069 appartenant à la machine virtuelle que vous possédez:
+   Aller dans "réglages réseau", "advances", "redirections de ports" dans la case protocole mettez "TCP", dans le "port hôte" et "port invité" écrivez 8069 puis cliquez sur ok.
 
 ## Installation du Serveur ERP sur une machine virtuelle Linux :
 Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
