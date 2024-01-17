@@ -36,6 +36,10 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 
 ## Installation pour linux : Desktop / serveur ERP / Docker
 
+- **Installation du Docker**
+
+- **Installation du serveur ERP**
+
 - **Installation du Desktop** 
 
 1. Clonez ce référentiel sur un terminal linux:
@@ -79,12 +83,7 @@ chmod +x /Chemin/De/Votre/Fichier/Launcher_SOUMSOUM.sh
 6. 
   
 
-10. Lancer le Launcher et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
-
-    
-- **Installation du serveur ERP**
-
-- **Installation du Docker**
+7. Lancer le Launcher et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
 
   
 ## Installation pour Windows : Desktop / serveur Odoo / Docker
