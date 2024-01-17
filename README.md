@@ -36,10 +36,10 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 
 ## Installation du Docker
 
-## Installation du Serveur ERP
+## Installation du Serveur ERP sur une machine virtuelle Linux :
 Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
 
-1. Clonez ce référentiel sur un terminal linux:
+1. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
 Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
 
 ```bash
@@ -61,9 +61,42 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 5. Une fois le Backup réaliser, connecter vous à l'aide de vos identifiant.
 
+## Installation du Serveur ERP sur une machine virtuelle Windows :
+
+1. Installer le logiciel git bash depuis ce lien si se n'est pas déjà fait:
+
+https://git-scm.com/download/win
+
+sélectionner 64-bit Git for Windows Setup.
+
+Une fois télécharger, pour l'installation appuyez uniquement sur Next et laisser les choix par défaut.
+
+2. Ouvrir Git Bash afin de récupérer les fichiers nécessaires au fonctionnement de l'application :
+
+ Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
+
+```bash
+cd Nom/De/Votre/Repertoire
+```
+
+Utilisez la commande git clone pour cloner le dépôt :
+
+```bash
+git clone https://github.com/Melvyn22350/SOUMSOUM
+
+```
+
+2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : http://adresse_ip_de_votre_serveur_contenant_le_docker:8069  exemple : http://172.31.11.79:8069;
+
+3. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
+
+4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier suivant : C:\Users\usrafpi.AFPI_BRUZ.000\Nom_De_Votre_Repertoire\SOUMSOUM_2024-01-17_10-50-05.zip, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
+
+5. Une fois le Backup réaliser, connecter vous à l'aide de vos identifiant.
+
 ## Installation du Desktop sur linux
 
-1. Clonez ce référentiel sur un terminal linux:
+1. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
 Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
 
 ```bash
@@ -117,7 +150,7 @@ sélectionner 64-bit Git for Windows Setup.
 
 Une fois télécharger, pour l'installation appuyez uniquement sur Next et laisser les choix par défaut.
 
-2. Ouvrir Git Bash afin de récupérer les fichiers nécessaires au fonctionnement de l'application
+2. Ouvrir Git Bash afin de récupérer les fichiers nécessaires au fonctionnement de l'application :
 
  Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
 
