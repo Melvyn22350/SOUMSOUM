@@ -4,14 +4,21 @@ import io
 import base64
 import sys
 import subprocess
+import ctypes
+import platform
+import os
 from tkinter import ttk
 from PIL import Image, ImageTk
 from io import BytesIO
 from tkinter import StringVar
-import ctypes
 from ctypes import wintypes
-import platform
-import os
+
+
+#===========================================================================================================
+#====================== Application de Logistique ==========================================================
+#===========================================================================================================
+
+
 
 # Obtenir le nom du système d'exploitation
 os_name = platform.system()
@@ -34,7 +41,7 @@ repertoire_parent = os.path.dirname(chemin_script)
 print(repertoire_parent)
 
 
-
+# Class représentant l'interface utilisateur de mise à jour du stock
 class StockUpdaterGUI:
     def __init__(self, master):
         self.master = master
@@ -44,11 +51,20 @@ class StockUpdaterGUI:
         self.tree.bind("<ButtonRelease-1>", self.show_selected_article_image)
         self.center_window()
 
+
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================
+
+    # Méthode pour définir l'icône de la fenêtre principale    
     def set_icon(self):
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
+#===========================================================================================================
+#===========================================================================================================
+
 
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         uid = common.authenticate(db, username, password, {})
@@ -73,7 +89,9 @@ class StockUpdaterGUI:
         else:
             print("Échec de l'authentification. Veuillez verifier vos identifiants.")
 
+    # Méthode pour créer les widgets
     def create_widgets(self):
+        # Création du Treeview pour afficher les articles
         self.tree = ttk.Treeview(self.master, columns=("Nom", "Référence", "Prix", "Quantité en stock"))
         self.tree.heading("#0", text="ID")
         self.tree.heading("Nom", text="Nom de l'article", anchor=tk.CENTER)
@@ -86,20 +104,28 @@ class StockUpdaterGUI:
         for col in ("Nom", "Référence", "Prix", "Quantité en stock"):
             self.tree.column(col, anchor=tk.CENTER)
 
+
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
-
+#===========================================================================================================
+#===========================================================================================================
+        
+        # Connexion au serveur Odoo et récupération des données d'articles
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         uid = common.authenticate(db, username, password, {})
         models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-
         articles = models.execute_kw(db, uid, password, 'product.template', 'search_read', [], {'fields': ['id', 'name', 'default_code', 'list_price', 'qty_available']})
 
+        # Insertion des articles dans le Treeview
         for article in articles:
             self.tree.insert("", tk.END, text=article['id'], values=(article['name'], article['default_code'], "${:.2f}".format(article['list_price']), article['qty_available']))
 
+        # Création des labels et entry pour la référence et la quantité
         self.label_ref = ttk.Label(self.master, text="Référence de l'article:", font=("Helvetica", 10, "bold"), foreground="white", background="#3498db")
         self.label_ref.grid(row=1, column=0, padx=10, pady=10, sticky=tk.E)
 
@@ -116,16 +142,17 @@ class StockUpdaterGUI:
         style = ttk.Style()
         style.configure("TButton", font=("Helvetica", 12, "bold"))
 
-        # Définir le style pour le bouton de déconnexion avec la couleur rouge
+        # Définition du style pour le bouton de déconnexion (rouge)
         style.map("Red.TButton",
                   foreground=[('pressed', 'white'), ('active', 'white')],
                   background=[('pressed', 'red'), ('active', 'red')])
 
-        # Définir le style pour le bouton de mise à jour avec la couleur verte
+        # Définition du style pour le bouton de mise à jour (vert)
         style.map("Green.TButton",
                   foreground=[('pressed', 'white'), ('active', 'white')],
                   background=[('pressed', 'green'), ('active', 'green')])
 
+        # Création des boutons de mise à jour et de déconnexion
         self.button_update = ttk.Button(self.master, text="Mettre à jour le stock", command=self.update_stock, style="Green.TButton", cursor="hand2")
         self.button_update.grid(row=3, column=0, columnspan=2, pady=20)
 
@@ -137,32 +164,46 @@ class StockUpdaterGUI:
         self.image_label = tk.Label(self.master, textvariable=self.selected_reference_text)
         self.image_label.grid(row=0, column=2, rowspan=4, padx=10, pady=10)
 
+    # Méthode pour mettre à jour le stock
     def update_stock(self):
+        # Récupération de la référence de l'article et de la nouvelle quantité
         article_default_code = self.entry_ref.get()
         new_quantity = max(0, int(self.entry_quantity.get()))
 
+
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
-
+#===========================================================================================================
+#===========================================================================================================
+        
+        # Connexion au serveur Odoo et récupération des données
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         uid = common.authenticate(db, username, password, {})
         models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-
+        
+        # Recherche de l'article par la référence
         article_id = models.execute_kw(db, uid, password, 'product.template', 'search', [[('default_code', '=', article_default_code)]])
         
         if article_id:
+            # Recherche des entrées de stock pour l'article
             stock_entries = models.execute_kw(db, uid, password, 'stock.quant', 'search_read', [
                 [('product_id', '=', article_id[0])]
             ])
 
             if stock_entries:
+
+                # Mise à jour de la quantité en stock avec la nouvelle quantité
                 new_stock_quantity = new_quantity
 
                 models.execute_kw(db, uid, password, 'stock.quant', 'write', [stock_entries[0]['id'], {'quantity': new_stock_quantity}])
                 print("Quantite en stock mise à jour avec succes.")
 
+                # Fermeture de la fenêtre actuelle et création d'une nouvelle instance de l'application
                 self.master.destroy()
                 root = tk.Tk()
                 app = StockUpdaterGUI(root)
@@ -173,24 +214,35 @@ class StockUpdaterGUI:
         else:
             print("Article non trouve.")
 
+    # Méthode pour afficher l'image de l'article sélectionné
     def show_selected_article_image(self, event):
+        # Récupération de l'ID et de la référence de l'article sélectionné dans le Treeview
         selected_item_id = self.tree.item(self.tree.selection())['text']
         selected_item_ref = self.tree.item(self.tree.selection())['values'][1]
 
+        # Effacement du contenu actuel de l'entrée et insertion de la référence sélectionnée
         self.entry_ref.delete(0, tk.END)  # Effacer le contenu actuel
         self.entry_ref.insert(0, selected_item_ref)  # Insérer la référence sélectionnée
 
+
+#===========================================================================================================
+#=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
+#===========================================================================================================
         url = "http://172.31.11.79:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
+#===========================================================================================================
+#===========================================================================================================
 
+        # Connexion au serveur Odoo et récupération de l'image de l'article sélectionné
         common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
         uid = common.authenticate(db, username, password, {})
         models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
 
         article_image = models.execute_kw(db, uid, password, 'product.template', 'read', [int(selected_item_id)], {'fields': ['image_1920']})
 
+        # Affichage de l'image s'il y en a une, sinon réinitialisation du texte
         if article_image and 'image_1920' in article_image[0]:
             image_data = article_image[0]['image_1920']
             image = Image.open(io.BytesIO(base64.b64decode(image_data)))
@@ -204,38 +256,45 @@ class StockUpdaterGUI:
             self.selected_reference_text.set("Sélectionner une référence")
             self.image_label.configure(image=None)
 
+    # Méthode pour centrer la fenêtre principale
     def center_window(self):
+        # Mettre à jour les tâches en attente et récupérer la largeur et la hauteur de l'écran
         self.master.update_idletasks()
         screen_width = self.master.winfo_screenwidth()
         screen_height = self.master.winfo_screenheight()
+
+        # Calculer les positions X et Y pour centrer la fenêtre        
         x_position = (screen_width - self.master.winfo_reqwidth()) // 2
         y_position = (screen_height - self.master.winfo_reqheight()) // 2
+        
+        # Appliquer les nouvelles positions        
         self.master.geometry("+{}+{}".format(x_position, y_position))
 
+    # Méthode pour configurer la couleur de fond de la fenêtre principale
     def configure_bg_color(self, color):
         self.master.configure(bg=color)
 
+    # Méthode pour quitter le programme
     def quit_program(self):
         print("Programme ferme.")
         self.redirect_to_login()
 
+    # Méthode pour rediriger vers la page de connexion et fermer la fenêtre actuelle
     def redirect_to_login(self):
         print("Redirection vers page de connexion.")
         self.master.destroy()  # Fermez la fenêtre actuelle
         if os_name == "Windows":
             subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
-
-
         else:      
             subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
-            
-def main():
-    root = tk.Tk()
-    app = StockUpdaterGUI(root)
-    # Changer la couleur de fond en bleu
-    app.configure_bg_color('#3498db')
-    root.mainloop()
 
+# Fonction principale            
+def main():
+    root = tk.Tk()    # Créer la fenêtre principale Tkinter
+    app = StockUpdaterGUI(root)     # Créer une instance de l'interface utilisateur du gestionnaire de stocks
+    app.configure_bg_color('#3498db')    # Changer la couleur de fond en bleu
+    root.mainloop()    # Lancer la boucle principale de l'interface utilisateur
+
+# Exécution de la fonction principale
 if __name__ == "__main__":
     main()
-    
