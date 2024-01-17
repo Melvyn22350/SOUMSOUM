@@ -1,18 +1,24 @@
 import xmlrpc.client
 import tkinter as tk
-from tkinter import ttk
+import platform
+import os
 import sys
 import subprocess
 import base64
-from PIL import Image, ImageTk, ImageOps
 import io
 import datetime
-from io import BytesIO
 import ctypes
 from ctypes import wintypes
-import platform
-import os
- 
+from tkinter import ttk
+from io import BytesIO
+from PIL import Image, ImageTk, ImageOps
+
+
+#====================================================================
+#============= Application de Production ============================
+#====================================================================
+
+
 # Obtenir le nom du système d'exploitation
 os_name = platform.system()
  
@@ -254,6 +260,8 @@ class OdooAPI:
                 print("Logo non trouvé pour la société.")
         else:
             print("Échec de l'authentification. Veuillez vérifier vos identifiants.")
+
+ 
  
     def on_treeview_click(self, event, order_id, id_entry):
         id_entry.delete(0, tk.END)
@@ -278,14 +286,10 @@ class OdooAPI:
         self.master.destroy()  # Fermez la fenêtre actuelle
         if os_name == "Windows":
             subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
-
-
         else:      
             subprocess.Popen([sys.executable, f'{repertoire_parent}//Page_De_Connexion.py'])
-            
-#====================================================================
-#====================================================================
-    
+
+ 
     def sort_treeview(self, tree, column):
         items = [(tree.set(k, column), k) for k in tree.get_children('')]
         items.sort()
