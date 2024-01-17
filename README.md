@@ -34,13 +34,11 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme.
 
-## Installation pour linux : Desktop / serveur ERP / Docker
+## Installation du Docker
 
-- **Installation du Docker**
+## Installation du Serveur ERP
 
-- **Installation du serveur ERP**
-
-- **Installation du Desktop** 
+## Installation du Desktop sur linux
 
 1. Clonez ce référentiel sur un terminal linux:
 Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
@@ -80,13 +78,13 @@ sudo apt upgrade python3.9
 chmod +x /Chemin/De/Votre/Fichier/Launcher_SOUMSOUM.sh
 ```
 
-6. 
-  
+6. Sur le bureau, faite un clique droit puis sélecionner "créer un nouveau" puis séléctionner "lien vers un emplacement (URL)...",
+ensuite appeller le raccourci comme vous le souhaitez et mettez le lien de l'emplacement du fichier "Laucnher_SOUMSOUM.sh" dans le champ "Nouveau lien vers un emplacement (URL)"
 
-7. Lancer le Launcher et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
+7. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
 
   
-## Installation pour Windows : Desktop / serveur Odoo / Docker
+## Installation du Desktop pour Windows :
 
 1. Installer le logiciel git bash depuis ce lien :
 
