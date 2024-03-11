@@ -38,7 +38,7 @@ Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'
 
 1. Aller sur le site internet portainer.io http://localhost:9000
 
-2. Aller dans l'onglet "stacks" puis cliquez sur "add stack"
+2. Cliquer sur local puis aller dans l'onglet "stacks" puis cliquez sur "add stack"
 
 3. Mettez un nom à votre stack puis cliquez sur web editor et écrivez ce script :
 
