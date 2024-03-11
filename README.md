@@ -163,7 +163,7 @@ chmod +x /Chemin/De/Votre/Fichier/Launcher_SOUMSOUM.sh
 ```
 
 6. Sur le bureau, faite un clique droit puis sélecionner "créer un nouveau" puis séléctionner "lien vers un emplacement (URL)...",
-ensuite appeller le raccourci comme vous le souhaitez et mettez le lien de l'emplacement du fichier "Laucnher_SOUMSOUM.sh" dans le champ "Nouveau lien vers un emplacement (URL)"
+ensuite appeller le raccourci comme vous le souhaitez et mettez le lien de l'emplacement du fichier "Launcher_SOUMSOUM.sh" dans le champ "Nouveau lien vers un emplacement (URL)"
 
 7. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
 
