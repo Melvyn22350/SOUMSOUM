@@ -64,10 +64,6 @@ services :
 ```
 Cliquez ensuite sur "deploy the stack" et vérifiez que les deux serveurs sont en running.
 
-4. Configurer le réseau de votre machine virtuelle qui possède le votre serveur ERP :
-   Accedez au parametre de votre carte réseau virtuelle, parametrer la de facon à ce que vous soyez en accès par pont;
-   Mettez l'adresse IP 172.31.10.158 sur votre machine virtuelle.
-
 ## Installation du Serveur ERP sur une machine virtuelle Linux :
 Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
 
@@ -85,11 +81,11 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
 
-2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : http://adresse_ip_de_votre_serveur_contenant_le_docker:8069  exemple : http://172.31.11.79:8069 ou aller sur le docker que vous venez de créer et cliquer sur "8069" dans la colonne "published ports".
+2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : localhost:8069 ou aller sur le docker que vous venez de créer et cliquer sur "8069" dans la colonne "published ports".
 
 3. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
 
-4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier suivant : /home/user/Nom_De_Votre_Repertoire/SOUMSOUM_2024-01-17_10-50-05.zip, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
+4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui dot être dans le même repertoire que le git, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
 
 5. Une fois le Backup réaliser, connecter vous à l'aide de vos identifiant.
 
@@ -122,7 +118,7 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 3. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
 
-4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier suivant : C:\Users\usrafpi.AFPI_BRUZ.000\Nom_De_Votre_Repertoire\SOUMSOUM_2024-01-17_10-50-05.zip, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
+4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui dot être dans le même repertoire que le git, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
 
 5. Une fois le Backup réaliser, connecter vous à l'aide de vos identifiant.
 
