@@ -64,8 +64,9 @@ services :
 ```
 Cliquez ensuite sur "deploy the stack" et vérifiez que les deux serveurs sont en running.
 
-4. Configurer le réseau de votre machine virtuelle qui possède le votre serveur ERP : 
-  Mettez l'adresse IP 172.31.10.158
+4. Configurer le réseau de votre machine virtuelle qui possède le votre serveur ERP :
+   Accedez au parametre de votre carte réseau virtuelle, parametrer la de facon à ce que vous soyez en accès par pont;
+   Mettez l'adresse IP 172.31.10.158 sur votre machine virtuelle.
 
 ## Installation du Serveur ERP sur une machine virtuelle Linux :
 Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
