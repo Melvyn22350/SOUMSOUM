@@ -250,7 +250,7 @@ class OdooAPI:
  
     # Méthode pour définir l'icône de l'application 
     def set_icon(self, root):
-        url = "http://172.31.11.79:8069"
+        url = "http://172.31.10.158:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
@@ -327,7 +327,7 @@ class OdooAPI:
         
 # Exécution de la fonction principale
 if __name__ == "__main__":
-    odoo_api = OdooAPI('http://172.31.11.79:8069', 'SOUMSOUM', 'melvyndupas01@gmail.com', '123456789')
+    odoo_api = OdooAPI('http://172.31.10.158:8069', 'SOUMSOUM', 'melvyndupas01@gmail.com', '123456789')
     # Affiche et permet la modification des commandes dans l'interface Odoo    
     odoo_api.display_and_modify_orders()
 

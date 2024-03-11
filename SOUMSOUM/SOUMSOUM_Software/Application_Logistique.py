@@ -58,7 +58,7 @@ class StockUpdaterGUI:
 
     # Méthode pour définir l'icône de la fenêtre principale    
     def set_icon(self):
-        url = "http://172.31.11.79:8069"
+        url = "http://172.31.10.158:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
@@ -108,7 +108,7 @@ class StockUpdaterGUI:
 #===========================================================================================================
 #=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
 #===========================================================================================================
-        url = "http://172.31.11.79:8069"
+        url = "http://172.31.10.158:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
@@ -174,7 +174,7 @@ class StockUpdaterGUI:
 #===========================================================================================================
 #=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
 #===========================================================================================================
-        url = "http://172.31.11.79:8069"
+        url = "http://172.31.10.158:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
@@ -228,7 +228,7 @@ class StockUpdaterGUI:
 #===========================================================================================================
 #=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
 #===========================================================================================================
-        url = "http://172.31.11.79:8069"
+        url = "http://172.31.10.158:8069"
         db = "SOUMSOUM"
         username = "melvyndupas01@gmail.com"
         password = "123456789"
