@@ -81,11 +81,11 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
 
-2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : localhost:8069 ou aller sur le docker que vous venez de créer et cliquer sur "8069" dans la colonne "published ports".
+2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : http://localhost:8069 ou aller sur le docker que vous venez de créer et cliquer sur "8069" dans la colonne "published ports".
 
 3. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
 
-4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui dot être dans le même repertoire que le git, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
+4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui doit être dans le même repertoire que le git, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
    
 5. Changer l'adresse IP de votre machine virtuelle contenant le docker pour celle ci : 172.31.10.158. Modifier les paramètres réseau de votre machine virtuelle pour passer en accès par pont puis valider. Déconnectez vous du réseau wifi sur la machine virtuelle puis reconnectez vous pour qu'il prenne en compte les modification.
 
