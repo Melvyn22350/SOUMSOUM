@@ -12,6 +12,7 @@ from ctypes import wintypes
 from tkinter import ttk
 from io import BytesIO
 from PIL import Image, ImageTk, ImageOps
+import tkinter.messagebox as messagebox
 
 
 #===========================================================================================================
@@ -58,7 +59,9 @@ class OdooAPI:
             uid = self.common.authenticate(self.db, self.username, self.password, {})
             return uid
         except Exception as e:
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
             print(f"Erreur d'authentification : {e}")
+            sys.exit()  # Quitter le programme
             return None
 
     # Méthode pour obtenir les identifiants des ordres de fabrication dans les états 'confirmed' et 'progress' 
@@ -72,6 +75,8 @@ class OdooAPI:
             return order_ids
         except Exception as e:
             print(f"Erreur lors de la récupération des numéros d'ordre de fabrication : {e}")
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            sys.exit()  # Quitter le programme
             return []
 
     # Méthode pour obtenir les informations d'une commande de fabrication à partir de son ID 
@@ -87,6 +92,8 @@ class OdooAPI:
             return order_info
         except Exception as e:
             print(f"Erreur lors de la récupération de l'ordre de fabrication : {e}")
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            sys.exit()  # Quitter le programme
             return []
 
     # Méthode pour mettre à jour la quantité produite pour une commande de fabrication dans Odoo et dans le tableau Treeview 
@@ -118,16 +125,27 @@ class OdooAPI:
                     print(f"Aucune information trouvée pour l'ordre de fabrication avec l'ID {order_id}")
             else:
                 print("Veuillez entrer une quantité produite positive.")
+                messagebox.showerror("Erreur", "La quantité ne peut pas être négative.")
         except ValueError:
             print("Veuillez entrer un nombre valide pour la quantité produite.")
         except Exception as e:
             print(f"Erreur lors de la mise à jour de la quantité produite : {e}")
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            sys.exit()  # Quitter le programme
 
     # Méthode pour afficher et modifier les ordres dans l'interface Tkinter
     def display_and_modify_orders(self):
-        # Authentification auprès du serveur Odoo
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(self.url))
-        uid = common.authenticate(self.db, self.username, self.password, {})
+        
+        
+        try:
+            # Authentification auprès du serveur Odoo
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(self.url))
+            uid = common.authenticate(self.db, self.username, self.password, {})
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
  
         if uid is not None:
             self.models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(self.url))
@@ -147,6 +165,7 @@ class OdooAPI:
  
             root.mainloop()
         else:
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo")
             print("Échec de l'authentification.")
 
     # Méthode pour configurer la fenêtre principale Tkinter 
@@ -256,10 +275,15 @@ class OdooAPI:
         password = "123456789"
 #===========================================================================================================
 #===========================================================================================================
-
-
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
+        try:
+            # Authentification auprès du serveur Odoo
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(self.url))
+            uid = common.authenticate(self.db, self.username, self.password, {})
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
         
         if uid:
             models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
