@@ -90,10 +90,8 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui dot être dans le même repertoire que le git, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
 
 ## Installation du Desktop sur linux
-
-1. Changer l'adresse IP de votre machine virtuelle contenant le docker pour celle ci : 172.31.10.159. Modifier les paramètres réseau de votre machine virtuelle pour passer en accès par pont puis valider. Redémarrer votre machine virtuelle.
    
-2. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
+1. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
 Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
 
 ```bash
@@ -106,6 +104,9 @@ Utilisez la commande git clone pour cloner le dépôt :
 git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
+
+2. Changer l'adresse IP de votre machine virtuelle contenant le docker pour celle ci : 172.31.10.159. Modifier les paramètres réseau de votre machine virtuelle pour passer en accès par pont puis valider. Redémarrer votre machine virtuelle.
+  
 3. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
 
 ```bash
