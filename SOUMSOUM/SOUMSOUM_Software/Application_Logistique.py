@@ -12,6 +12,7 @@ from PIL import Image, ImageTk
 from io import BytesIO
 from tkinter import StringVar
 from ctypes import wintypes
+import tkinter.messagebox as messagebox
 
 
 #===========================================================================================================
@@ -197,7 +198,12 @@ class StockUpdaterGUI:
     def update_stock(self):
         # Récupération de la référence de l'article et de la nouvelle quantité
         article_default_code = self.entry_ref.get()
-        new_quantity = max(0, int(self.entry_quantity.get()))
+        new_quantity = int(self.entry_quantity.get())  
+        
+        if new_quantity < 0:
+            # Afficher un message d'erreur
+            messagebox.showerror("Erreur", "La quantité ne peut pas être négative.")
+            return
 
 
 #===========================================================================================================
