@@ -109,7 +109,7 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 3. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
 
 ```bash
-pip install -r requierement.txt
+pip install -r requierement_linux.txt
 ```
 
 2. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
@@ -184,15 +184,12 @@ Microsoft store s'ouvre puis cliquez sur obtenir.
 
 4. Verifier si l'installation s'est bien passée en marquant "python --version" dans l'invité de commande
 
-5. Installer Pillow et pip via l'invité de commande grace à cette commande :
+5. Installez les bibliothèques nécessaires avec la commande suivante sur gitbash:
 
 ```bash
-python3 -m pip install --upgrade pip
+pip install -r requierement_windows.txt
 ```
 
-```bash
-python3 -m pip install --upgrade Pillow
-```
 6. Aller chercher l'emplacement du dossier que vous venez de cloner, rentrez dans le dossier SOUMSOUM puis effectuer un clique droit sur "Launcher_SOUMSOUM.sh" et séléctionner créer un raccourci et glisser le sur le bureau.
 
 7. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
