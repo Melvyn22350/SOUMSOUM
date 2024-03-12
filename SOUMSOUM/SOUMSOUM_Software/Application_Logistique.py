@@ -51,7 +51,6 @@ class StockUpdaterGUI:
         self.tree.bind("<ButtonRelease-1>", self.show_selected_article_image)
         self.center_window()
 
-
 #===========================================================================================================
 #=== Paramètre pour la connexion Odoo (ne pas modifier sauf si votre serveur à un addressage différents) ===
 #===========================================================================================================
@@ -163,6 +162,36 @@ class StockUpdaterGUI:
         self.selected_reference_text = StringVar(value="Sélectionner une référence")
         self.image_label = tk.Label(self.master, textvariable=self.selected_reference_text)
         self.image_label.grid(row=0, column=2, rowspan=4, padx=10, pady=10)
+
+
+        # Bouton Actualiser
+        self.button_refresh = ttk.Button(self.master, text="Actualiser", command=self.refresh_data, cursor="hand2")
+        self.button_refresh.grid(row=5, column=0, columnspan=2, pady=10)
+
+    def refresh_data(self):
+        # Réexécuter la requête pour obtenir les articles mis à jour
+        url = "http://172.31.10.158:8069"
+        db = "SOUMSOUM"
+        username = "melvyndupas01@gmail.com"
+        password = "123456789"
+
+        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+        uid = common.authenticate(db, username, password, {})
+        models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+
+        articles = models.execute_kw(db, uid, password, 'product.template', 'search_read', [], {'fields': ['id', 'name', 'default_code', 'list_price', 'qty_available']})
+
+        # Mettre à jour le Treeview avec les nouvelles données
+        self.tree.delete(*self.tree.get_children())  # Effacer les anciennes données
+        for article in articles:
+            self.tree.insert("", tk.END, text=article['id'], values=(article['name'], article['default_code'], "${:.2f}".format(article['list_price']), article['qty_available']))
+
+        # Réinitialiser les champs de texte ou d'autres widgets si nécessaire
+        self.entry_ref.delete(0, tk.END)
+        self.entry_quantity.delete(0, tk.END)
+
+        print("Les données ont été actualisées !")
+
 
     # Méthode pour mettre à jour le stock
     def update_stock(self):
