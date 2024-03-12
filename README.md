@@ -139,6 +139,11 @@ Utilisez la commande git clone pour cloner le dépôt :
 git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
+2. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
+
+```bash
+pip install -r requierement.txt
+```
 
 2. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
 
