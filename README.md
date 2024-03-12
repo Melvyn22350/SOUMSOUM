@@ -61,6 +61,7 @@ services :
        - POSTGRES_DB=postgres
        - POSTGRES_PASSWORD=myodoo
        - POSTGRES_USER=odoo
+
 ```
 Cliquez ensuite sur "deploy the stack" et vérifiez que les deux serveurs sont en running.
 
