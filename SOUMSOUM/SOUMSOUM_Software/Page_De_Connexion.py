@@ -10,6 +10,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from io import BytesIO
 from ctypes import wintypes
+import tkinter.messagebox as messagebox
 
 
 #===========================================================================================================
@@ -231,11 +232,8 @@ class LoginPage:
                 print("Type de connexion non reconnu.")
         else:
             print("Echec de la connexion. Veuillez verifier vos identifiants.")
-            self.show_authentication_failed_window()
+            messagebox.showerror("Erreur", "Echec de la connexion. Veuillez verifier vos identifiants.")
 
-    def show_authentication_failed_window(self):
-        auth_failed_window = tk.Toplevel()
-        app = AuthenticationFailedWindow(auth_failed_window)
 
     # Méthode de gestion de la déconnexion
     def logout(self):
