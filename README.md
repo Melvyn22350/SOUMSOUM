@@ -90,8 +90,10 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui dot être dans le même repertoire que le git, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
 
 ## Installation du Desktop sur linux
-   
-1. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
+
+1. Connectez vous au réseau afpicfai_wifi_guests et changer les paramètre réseau de votre VM pour passer en accès pas pont. Redémarer la VM.
+  
+2. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
 Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
 
 ```bash
@@ -125,7 +127,7 @@ ensuite appeller le raccourci comme vous le souhaitez et mettez le lien de l'emp
   
 ## Installation du Desktop pour Windows :
 
-1. Connectez vous au réseau wifi guest et changer les paramètre réseau de votre VM pour passer en accès pas pont. Redémarer la VM.
+1. Connectez vous au réseau afpicfai_wifi_guests et changer les paramètre réseau de votre VM pour passer en accès pas pont. Redémarer la VM.
   
 1. Installer le logiciel git bash depuis ce lien :
 
