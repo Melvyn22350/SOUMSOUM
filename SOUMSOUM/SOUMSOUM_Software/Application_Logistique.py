@@ -65,9 +65,15 @@ class StockUpdaterGUI:
 #===========================================================================================================
 #===========================================================================================================
 
-
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
+        try:
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            uid = common.authenticate(db, username, password, {})
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
 
         if uid:
             models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
@@ -114,12 +120,16 @@ class StockUpdaterGUI:
         password = "123456789"
 #===========================================================================================================
 #===========================================================================================================
-        
-        # Connexion au serveur Odoo et récupération des données d'articles
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
-        models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-        articles = models.execute_kw(db, uid, password, 'product.template', 'search_read', [], {'fields': ['id', 'name', 'default_code', 'list_price', 'qty_available']})
+        try:
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            uid = common.authenticate(db, username, password, {})
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+            articles = models.execute_kw(db, uid, password, 'product.template', 'search_read', [], {'fields': ['id', 'name', 'default_code', 'list_price', 'qty_available']})
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
 
         # Insertion des articles dans le Treeview
         for article in articles:
@@ -176,9 +186,15 @@ class StockUpdaterGUI:
         username = "melvyndupas01@gmail.com"
         password = "123456789"
 
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
-        models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+        try:
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            uid = common.authenticate(db, username, password, {})
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
 
         articles = models.execute_kw(db, uid, password, 'product.template', 'search_read', [], {'fields': ['id', 'name', 'default_code', 'list_price', 'qty_available']})
 
@@ -199,7 +215,7 @@ class StockUpdaterGUI:
         # Récupération de la référence de l'article et de la nouvelle quantité
         article_default_code = self.entry_ref.get()
         new_quantity = int(self.entry_quantity.get())  
-        
+        print(new_quantity)
         if new_quantity < 0:
             # Afficher un message d'erreur
             messagebox.showerror("Erreur", "La quantité ne peut pas être négative.")
@@ -216,13 +232,23 @@ class StockUpdaterGUI:
 #===========================================================================================================
 #===========================================================================================================
         
-        # Connexion au serveur Odoo et récupération des données
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
-        models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+        try:
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            uid = common.authenticate(db, username, password, {})
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
         
         # Recherche de l'article par la référence
         article_id = models.execute_kw(db, uid, password, 'product.template', 'search', [[('default_code', '=', article_default_code)]])
+
+        if not article_id:
+            # Afficher un message d'erreur si aucune correspondance n'est trouvée
+            messagebox.showerror("Erreur", f"Aucun article trouvé avec la référence {article_default_code}.")
+            return
         
         if article_id:
             # Recherche des entrées de stock pour l'article
@@ -270,10 +296,15 @@ class StockUpdaterGUI:
 #===========================================================================================================
 #===========================================================================================================
 
-        # Connexion au serveur Odoo et récupération de l'image de l'article sélectionné
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
-        models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+        try:
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            uid = common.authenticate(db, username, password, {})
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
 
         article_image = models.execute_kw(db, uid, password, 'product.template', 'read', [int(selected_item_id)], {'fields': ['image_1920']})
 
