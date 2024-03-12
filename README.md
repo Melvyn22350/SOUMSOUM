@@ -111,40 +111,16 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 pip install -r requierement_linux.txt
 ```
 
-2. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
-
-```bash
-pip install pillow
-```
-
-3. Installer les versions supérieur de pillow avec la commande sur linux :
-
-```bash
-pip install --upgrade Pillow
-```
-
-4. Installer la version de python3.9 ou supérieur avec la commande sur linux :
-
-```bash
-sudo apt install python3.9
-```
-
-5. Mettez à jour python3.9 avec la commande sur linux :
-
-```bash
-sudo apt upgrade python3.9
-```
-
-6. Sur un terminal, rendre le fichier "Launcher_SOUMSOUM.sh" éxecutable depuis cette commande :
+4. Sur un terminal, rendre le fichier "Launcher_SOUMSOUM.sh" éxecutable depuis cette commande :
 
 ```bash
 chmod +x /Chemin/De/Votre/Fichier/Launcher_SOUMSOUM.sh
 ```
 
-7. Sur le bureau, faite un clique droit puis sélecionner "créer un nouveau" puis séléctionner "lien vers un emplacement (URL)...",
+5. Sur le bureau, faite un clique droit puis sélecionner "créer un nouveau" puis séléctionner "lien vers un emplacement (URL)...",
 ensuite appeller le raccourci comme vous le souhaitez et mettez le lien de l'emplacement du fichier "Launcher_SOUMSOUM.sh" dans le champ "Nouveau lien vers un emplacement (URL)"
 
-8. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
+6. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
 
   
 ## Installation du Desktop pour Windows :
