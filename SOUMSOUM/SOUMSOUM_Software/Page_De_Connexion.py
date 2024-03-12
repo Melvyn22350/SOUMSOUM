@@ -36,6 +36,31 @@ print(chemin_script)
 repertoire_parent = os.path.dirname(chemin_script)
 print(repertoire_parent)
 
+class AuthenticationFailedWindow:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Echec de l'authentification")
+        self.master.resizable(False, False)
+
+        # Centrer la fenêtre sur l'écran
+        self.center_window()
+
+        label_message = ttk.Label(self.master, text="Echec de l'authentification. Veuillez vérifier vos identifiants.", wraplength=250)
+        label_message.pack(pady=20)
+
+        button_ok = ttk.Button(self.master, text="OK", command=self.close_window)
+        button_ok.pack(pady=10)
+
+    def center_window(self):
+        screen_width = self.master.winfo_screenwidth()
+        screen_height = self.master.winfo_screenheight()
+        x = (screen_width - 300) // 2  # Largeur de la fenêtre est fixée à 300
+        y = (screen_height - 100) // 2  # Hauteur de la fenêtre est fixée à 100
+        self.master.geometry("+{}+{}".format(x, y))
+
+    def close_window(self):
+        self.master.destroy()
+        
 # Classe représentant la page de connexion
 class LoginPage:
     def __init__(self, master):
@@ -206,7 +231,12 @@ class LoginPage:
                 print("Type de connexion non reconnu.")
         else:
             print("Echec de la connexion. Veuillez verifier vos identifiants.")
-    
+            self.show_authentication_failed_window()
+
+    def show_authentication_failed_window(self):
+        auth_failed_window = tk.Toplevel()
+        app = AuthenticationFailedWindow(auth_failed_window)
+
     # Méthode de gestion de la déconnexion
     def logout(self):
         print("Deconnexion reussie.")
