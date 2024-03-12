@@ -105,7 +105,7 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
   
-3. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
+3. Installez les bibliothèques nécessaires avec la commande suivante sur linux en utilisant la commande cd pour accedez à l'emplacement du dossier:
 
 ```bash
 pip install -r requierement_linux.txt
