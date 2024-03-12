@@ -92,7 +92,7 @@ git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ## Installation du Desktop sur linux
 
-1. Connectez vous au réseau afpicfai_wifi_guests et changer les paramètre réseau de votre VM pour passer en accès pas pont. Redémarer la VM.
+1. Connectez vous au réseau afpicfai_wifi_guests.
   
 2. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
 Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
@@ -128,7 +128,7 @@ ensuite appeller le raccourci comme vous le souhaitez et mettez le lien de l'emp
   
 ## Installation du Desktop pour Windows :
 
-1. Connectez vous au réseau afpicfai_wifi_guests et changer les paramètre réseau de votre VM pour passer en accès pas pont. Redémarer la VM.
+1. Connectez vous au réseau afpicfai_wifi_guests.
   
 1. Installer le logiciel git bash depuis ce lien :
 
