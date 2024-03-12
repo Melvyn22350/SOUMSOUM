@@ -135,12 +135,20 @@ class LoginPage:
         password = "123456789"
 #===========================================================================================================
 #===========================================================================================================
+        try:
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
+            uid = common.authenticate(db, username, password, {})
+            user_data = models.execute_kw(db, uid, password,'res.users', 'read',[uid], {'fields': ['image_1920']})
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
+
         
 
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
-        uid = common.authenticate(db, username, password, {})
-        user_data = models.execute_kw(db, uid, password,'res.users', 'read',[uid], {'fields': ['image_1920']})
+
         if user_data and user_data[0].get('image_1920'):
             image_data = user_data[0]['image_1920']
             try:
@@ -169,10 +177,15 @@ class LoginPage:
 
 #===========================================================================================================
 #===========================================================================================================
-        
+        try:
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            uid = common.authenticate(db, username, password, {})
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
 
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
         
         if uid:
             models = xmlrpc.client.ServerProxy('{}/xmlrpc/2/object'.format(url))
@@ -209,9 +222,15 @@ class LoginPage:
 #===========================================================================================================
 #===========================================================================================================
         
-        common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
-        uid = common.authenticate(db, username, password, {})
-
+        try:
+            common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(url))
+            uid = common.authenticate(db, username, password, {})
+        except Exception as e:
+            # Afficher un message d'erreur si la connexion échoue
+            messagebox.showerror("Erreur de connexion", f"Impossible de se connecter au serveur Odoo : {e}")
+            self.master.destroy()  # Fermer la fenêtre en cas d'erreur
+            return
+        
         if uid:
 
             if 'prod' in username:
