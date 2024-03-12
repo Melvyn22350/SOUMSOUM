@@ -104,8 +104,6 @@ Utilisez la commande git clone pour cloner le dépôt :
 git clone https://github.com/Melvyn22350/SOUMSOUM
 
 ```
-
-2. Changer l'adresse IP de votre machine virtuelle contenant le docker pour celle ci : 172.31.10.159. Modifier les paramètres réseau de votre machine virtuelle pour passer en accès par pont puis valider. Redémarrer votre machine virtuelle.
   
 3. Installez les bibliothèques nécessaires avec la commande suivante sur linux:
 
