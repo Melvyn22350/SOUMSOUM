@@ -75,7 +75,7 @@ Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
 
 7. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
 
-8. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui est dans le repertoire NomDeVotreRepertoire/SOUMSOUM/SOUMSOUM, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
+8. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui est dans le repertoire NomDeVotreRepertoire/SOUMSOUM, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
    
 9. Modifier les paramètres réseau de votre machine virtuelle pour passer en accès par pont puis valider. Changer l'adresse IP de votre machine virtuelle contenant le docker pour celle ci : 172.31.10.158. Déconnectez vous du réseau wifi sur la machine virtuelle puis reconnectez vous pour qu'il prenne en compte les modification.
 
@@ -99,10 +99,7 @@ pip install -r requierement_linux.txt
 chmod +x /Chemin/De/Votre/Fichier/Launcher_SOUMSOUM.sh
 ```
 
-6. Sur le bureau, faite un clique droit puis sélecionner "créer un nouveau" puis séléctionner "lien vers un emplacement (URL)...",
-ensuite appeller le raccourci comme vous le souhaitez et mettez le lien de l'emplacement du fichier "Launcher_SOUMSOUM.sh" dans le champ "Nouveau lien vers un emplacement (URL)"
-
-7. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
+6. Lancer le Launcher présent dans le dossier SOUMSOUM_Software et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé. Les identifiants sont écris à la fin du Read_me.
 
   
 ## Installation du Desktop pour Windows (PC_3) :
@@ -136,9 +133,7 @@ Microsoft store s'ouvre puis cliquez sur obtenir python3.
 pip install -r requierement_windows.txt
 ```
 
-7. Aller chercher l'emplacement du dossier que vous venez de cloner, rentrez dans le dossier SOUMSOUM puis effectuer un clique droit sur "Launcher_SOUMSOUM.sh" et séléctionner créer un raccourci et glisser le sur le bureau.
-
-8. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
+7. Lancer le Launcher présent dans le dossier SOUMSOUM_Software et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé. Les identifiants sont écris à la fin du Read_me.
 
 ## Guide de l'Utilisateur
 
