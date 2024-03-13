@@ -34,13 +34,15 @@ Notre entreprise a entrepris un ambitieux projet visant à moderniser nos opéra
 
 Assurez-vous de configurer correctement les paramètres du serveur Odoo avant d'utiliser ce programme.
 
-## Installation du Docker
+## Installation du Docker et du serveur ERP sur Linux (PC_1)
 
-1. Aller sur le site internet portainer.io http://localhost:9000
+1. Installer la machine virtuelle PC_1 sur virtual Box, puis démarrer la.
 
-2. Connecter vous en tant que admin. Cliquer sur local puis aller dans l'onglet "stacks" puis cliquez sur "add stack"
+2. Aller sur le site internet portainer.io http://localhost:9000
 
-3. Mettez un nom à votre stack puis cliquez sur web editor et écrivez ce script :
+3. Connectez-vous en tant que admin. Cliquer sur local puis aller dans l'onglet "stacks" puis cliquez sur "add stack"
+
+4. Mettez un nom à votre stack puis cliquez sur web editor et écrivez ce script :
 
 ```bash
 version: '2'
@@ -65,72 +67,53 @@ services :
 ```
 Cliquez ensuite sur "deploy the stack" et vérifiez que les deux serveurs sont en running.
 
-## Installation du Serveur ERP sur une machine virtuelle Linux :
 Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
 
-1. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
-Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
+5. Collez les fichiers de la clé USB dans un emplacement de votre ordinateur que vous souhaitez.
 
-```bash
-cd Nom/De/Votre/Repertoire
-```
+6. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : http://localhost:8069 ou aller sur le docker que vous venez de créer et cliquer sur "8069" dans la colonne "published ports".
 
-Utilisez la commande git clone pour cloner le dépôt :
+7. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
 
-```bash
-git clone https://github.com/Melvyn22350/SOUMSOUM
-
-```
-
-2. Ouvrez Le serveur ERP Odoo sur un navigateur avec ce lien : http://localhost:8069 ou aller sur le docker que vous venez de créer et cliquer sur "8069" dans la colonne "published ports".
-
-3. Une fois sur le site, sélectionner "Gestion des bases de données" puis "Restore Database";
-
-4. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui doit être dans le même repertoire que le git, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
+8. Ecrivez le Master Password (MSIR5) cliquez sur parcourir et selectionner le fichier .ZIP que vous venez de telecharger qui est dans le repertoire NomDeVotreRepertoire/SOUMSOUM/SOUMSOUM, puis affecter un nom à votre Database, celui-ci doit être "SOUMSOUM";
    
-5. Changer l'adresse IP de votre machine virtuelle contenant le docker pour celle ci : 172.31.10.158. Modifier les paramètres réseau de votre machine virtuelle pour passer en accès par pont puis valider. Déconnectez vous du réseau wifi sur la machine virtuelle puis reconnectez vous pour qu'il prenne en compte les modification.
+9. Modifier les paramètres réseau de votre machine virtuelle pour passer en accès par pont puis valider. Changer l'adresse IP de votre machine virtuelle contenant le docker pour celle ci : 172.31.10.158. Déconnectez vous du réseau wifi sur la machine virtuelle puis reconnectez vous pour qu'il prenne en compte les modification.
 
-## Installation du Desktop sur linux
+## Installation du Desktop sur linux (PC_2)
 
-1. Connectez vous au réseau afpicfai_wifi_guests.
+1. Installer la machine virtuelle PC_2 sur virtual Box, puis démarrer la.
+
+2. Connectez vous au réseau afpicfai_wifi_guests.
   
-2. Clonez ce référentiel sur un terminal linux si se n'est pas déjà fait:
-Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
-
-```bash
-cd Nom/De/Votre/Repertoire
-```
-
-Utilisez la commande git clone pour cloner le dépôt :
-
-```bash
-git clone https://github.com/Melvyn22350/SOUMSOUM
-
-```
+3. Collez les fichiers de la clé USB dans un emplacement de votre ordinateur que vous souhaitez.
   
-3. Installez les bibliothèques nécessaires avec la commande suivante sur linux en utilisant la commande cd pour accedez à l'emplacement du dossier:
+4. Installez les bibliothèques nécessaires avec la commande suivante sur linux en utilisant la commande cd pour accedez à l'emplacement du dossier:
 
 ```bash
 pip install -r requierement_linux.txt
 ```
 
-4. Sur un terminal, rendre le fichier "Launcher_SOUMSOUM.sh" éxecutable depuis cette commande :
+5. Sur un terminal, rendre le fichier "Launcher_SOUMSOUM.sh" éxecutable depuis cette commande :
 
 ```bash
 chmod +x /Chemin/De/Votre/Fichier/Launcher_SOUMSOUM.sh
 ```
 
-5. Sur le bureau, faite un clique droit puis sélecionner "créer un nouveau" puis séléctionner "lien vers un emplacement (URL)...",
+6. Sur le bureau, faite un clique droit puis sélecionner "créer un nouveau" puis séléctionner "lien vers un emplacement (URL)...",
 ensuite appeller le raccourci comme vous le souhaitez et mettez le lien de l'emplacement du fichier "Launcher_SOUMSOUM.sh" dans le champ "Nouveau lien vers un emplacement (URL)"
 
-6. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
+7. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
 
   
-## Installation du Desktop pour Windows :
+## Installation du Desktop pour Windows (PC_3) :
 
-1. Connectez vous au réseau afpicfai_wifi_guests.
+1. Installer la machine virtuelle PC_3 sur virtual Box, puis démarrer la.
+
+2. Connectez vous au réseau afpicfai_wifi_guests.
   
-1. Installer le logiciel git bash depuis ce lien :
+3. Collez les fichiers de la clé USB dans un emplacement de votre ordinateur que vous souhaitez.
+  
+4. Installer le logiciel git bash depuis ce lien :
 
 https://git-scm.com/download/win
 
@@ -138,44 +121,32 @@ sélectionner 64-bit Git for Windows Setup.
 
 Une fois télécharger, pour l'installation appuyez uniquement sur Next et laisser les choix par défaut.
 
-2. Ouvrir Git Bash afin de récupérer les fichiers nécessaires au fonctionnement de l'application :
+5. Ouvrir Git Bash :
 
- Utilisez la commande cd pour vous déplacer dans le répertoire ou vous souhaitez l'installer.
-
-```bash
-cd Nom/De/Votre/Repertoire
-```
-
-Utilisez la commande git clone pour cloner le dépôt :
-
-```bash
-git clone https://github.com/Melvyn22350/SOUMSOUM
-
-```
-
-3. Installer Python via l'invité de commande :
+Installer Python via l'invité de commande GitBash :
 
 ```bash
 python3
 ```
-Microsoft store s'ouvre puis cliquez sur obtenir.
+Microsoft store s'ouvre puis cliquez sur obtenir python3.
 
-4. Verifier si l'installation s'est bien passée en marquant "python --version" dans l'invité de commande
-
-5. Installez les bibliothèques nécessaires avec la commande suivante sur gitbash:
+6. Installez les bibliothèques nécessaires avec la commande suivante sur gitbash:
 
 ```bash
 pip install -r requierement_windows.txt
 ```
 
-6. Aller chercher l'emplacement du dossier que vous venez de cloner, rentrez dans le dossier SOUMSOUM puis effectuer un clique droit sur "Launcher_SOUMSOUM.sh" et séléctionner créer un raccourci et glisser le sur le bureau.
+7. Aller chercher l'emplacement du dossier que vous venez de cloner, rentrez dans le dossier SOUMSOUM puis effectuer un clique droit sur "Launcher_SOUMSOUM.sh" et séléctionner créer un raccourci et glisser le sur le bureau.
 
-7. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
-
+8. Lancer le Launcher depuis le raccourci bureau et connectez vous à l'aide de vos identifiants du serveur ERP ainsi que votre mot de passe associé.
 
 ## Guide de l'Utilisateur
 
 Consultez le tableau d'affichage pour obtenir un aperçu complet des ordres de fabrication. Cliquez sur un ID d'ordre pour visualiser l'image du produit associé. Utilisez les champs dédiés pour mettre à jour la quantité produite.
+
+Connectez-vous sur la page logistique avec l'identifiant : "log" et le mot de passe "123".
+
+Connectez-vous sur la page production avec l'identifiant : "prod" et le mot de passe "123".
 
 ## Contact
 
