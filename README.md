@@ -143,6 +143,8 @@ Connectez-vous sur la page logistique avec l'identifiant : "log" et le mot de pa
 
 Connectez-vous sur la page production avec l'identifiant : "prod" et le mot de passe "123".
 
+Connectez-vous sur le serveur Odoo en tant que commercial avec l'idendifiant : "commercial" et le mot de passe "123".
+
 Connectez-vous sur le serveur Odoo en tant qu'administrateur avec l'idendifiant : "admin" et le mot de passe "123456789".
 
 ## Contact
