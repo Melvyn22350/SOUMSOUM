@@ -65,7 +65,7 @@ services :
        - POSTGRES_USER=odoo
 
 ```
-Cliquez ensuite sur "deploy the stack" et vérifiez que les deux serveurs sont en running.
+Cliquez ensuite sur "deploy the stack" et vérifiez que les deux serveurs sont en running. Le temps de chargement peut parraitre long, attendez un peu le temps que l'image Odoo15 ce créer.
 
 Une fois le Docker créer vous pouvez récuperer un backup du serveur ERP.
 
