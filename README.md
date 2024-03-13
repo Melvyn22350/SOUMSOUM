@@ -143,6 +143,8 @@ Connectez-vous sur la page logistique avec l'identifiant : "log" et le mot de pa
 
 Connectez-vous sur la page production avec l'identifiant : "prod" et le mot de passe "123".
 
+Connectez-vous sur le serveur Odoo en tant qu'administrateur avec l'idendifiant : "admin" et le mot de passe "123456789".
+
 ## Contact
 
 Pour toute question ou assistance, veuillez contacter notre équipe informatique à l'adresse tech_support@soumsoum.com.
